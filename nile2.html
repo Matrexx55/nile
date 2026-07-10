@@ -1,0 +1,849 @@
+<!DOCTYPE html>
+<html lang="ka">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>ნილე — საცხობი და საკონდიტრო</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+Georgian:wght@400;500;600;700;900&family=Noto+Sans+Georgian:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --cream:#FBF3E9;
+    --cream-soft:#F5E9D9;
+    --beige:#EFE0CB;
+    --peach:#F0B79E;
+    --peach-deep:#E29A7C;
+    --rose:#E6A8A0;
+    --brown:#3B2A20;
+    --brown-mid:#7A5F4C;
+    --brown-soft:#9C826D;
+    --gold:#C69A5B;
+    --line:rgba(59,42,32,0.12);
+    --shadow: 0 20px 40px -20px rgba(59,42,32,0.25);
+  }
+  *{margin:0;padding:0;box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  body{
+    font-family:'Noto Sans Georgian', sans-serif;
+    background:var(--cream);
+    color:var(--brown);
+    line-height:1.6;
+    overflow-x:hidden;
+  }
+  h1,h2,h3,h4,.display{
+    font-family:'Noto Serif Georgian', serif;
+    color:var(--brown);
+    font-weight:700;
+  }
+  a{text-decoration:none;color:inherit;}
+  ul{list-style:none;}
+  img{max-width:100%;display:block;}
+  button{font-family:inherit;cursor:pointer;border:none;background:none;}
+  .wrap{max-width:1180px;margin:0 auto;padding:0 28px;}
+  ::selection{background:var(--peach);color:var(--brown);}
+
+  /* ---------- scallop divider (signature element: crimped pastry-crust edge) ---------- */
+  .scallop{
+    width:100%;
+    height:28px;
+    display:block;
+  }
+  .scallop-top path{fill:var(--cream);}
+  .scallop-flip path{fill:var(--cream-soft);}
+
+  /* ---------- NAV ---------- */
+  header{
+    position:sticky; top:0; z-index:60;
+    background:rgba(251,243,233,0.86);
+    backdrop-filter:blur(14px);
+    border-bottom:1px solid var(--line);
+  }
+  nav{
+    display:flex; align-items:center; justify-content:space-between;
+    padding:16px 28px;
+    max-width:1180px; margin:0 auto;
+  }
+  .logo{
+    font-family:'Noto Serif Georgian',serif;
+    font-size:28px; font-weight:900; letter-spacing:1px; color:var(--brown);
+    display:flex; align-items:center; gap:8px;
+  }
+  .logo .dot{width:8px;height:8px;border-radius:50%;background:var(--peach-deep);display:inline-block;}
+  .nav-links{display:flex; gap:34px; align-items:center;}
+  .nav-links a{
+    font-size:15px; font-weight:500; color:var(--brown-mid);
+    position:relative; padding-bottom:4px;
+    transition:color .25s ease;
+  }
+  .nav-links a::after{
+    content:''; position:absolute; left:0; bottom:0; width:0; height:2px;
+    background:var(--peach-deep); transition:width .25s ease;
+  }
+  .nav-links a:hover{color:var(--brown);}
+  .nav-links a:hover::after{width:100%;}
+  .chat-btn{
+    display:flex; align-items:center; gap:8px;
+    background:linear-gradient(135deg, var(--peach) 0%, var(--rose) 100%);
+    color:#fff; padding:11px 20px; border-radius:999px;
+    font-weight:600; font-size:14.5px;
+    box-shadow:0 8px 20px -8px rgba(226,154,124,0.7);
+    transition:transform .2s ease, box-shadow .2s ease;
+  }
+  .chat-btn:hover{transform:translateY(-2px); box-shadow:0 12px 24px -8px rgba(226,154,124,0.85);}
+  .burger{display:none; flex-direction:column; gap:5px;}
+  .burger span{width:24px;height:2px;background:var(--brown);}
+
+  /* ---------- HERO ---------- */
+  .hero{
+    position:relative;
+    padding:90px 28px 70px;
+    background:
+      radial-gradient(circle at 85% 15%, rgba(240,183,158,0.35), transparent 45%),
+      radial-gradient(circle at 8% 80%, rgba(230,168,160,0.3), transparent 40%),
+      var(--cream);
+    overflow:hidden;
+  }
+  .hero-inner{
+    max-width:1180px; margin:0 auto;
+    display:grid; grid-template-columns:1.1fr 0.9fr; gap:50px; align-items:center;
+  }
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:13px; letter-spacing:2px; text-transform:uppercase;
+    color:var(--peach-deep); font-weight:700; margin-bottom:18px;
+  }
+  .eyebrow::before{content:'';width:22px;height:1px;background:var(--peach-deep);}
+  .hero h1{
+    font-size:clamp(42px, 6vw, 68px);
+    line-height:1.05;
+    margin-bottom:22px;
+  }
+  .hero h1 em{
+    font-style:normal; color:var(--peach-deep);
+    position:relative;
+  }
+  .hero p.tagline{
+    font-size:18px; color:var(--brown-mid); max-width:460px; margin-bottom:34px;
+  }
+  .cta-row{display:flex; gap:16px; flex-wrap:wrap;}
+  .btn-primary{
+    background:var(--brown); color:var(--cream);
+    padding:16px 32px; border-radius:999px; font-weight:600; font-size:15.5px;
+    box-shadow:var(--shadow);
+    transition:transform .2s ease, background .25s ease;
+    display:inline-flex; align-items:center; gap:10px;
+  }
+  .btn-primary:hover{transform:translateY(-3px); background:#2c1f17;}
+  .btn-secondary{
+    padding:16px 30px; border-radius:999px; font-weight:600; font-size:15.5px;
+    border:1.5px solid var(--brown); color:var(--brown);
+    transition:all .25s ease;
+  }
+  .btn-secondary:hover{background:var(--brown); color:var(--cream);}
+
+  .hero-visual{
+    position:relative;
+    display:flex; align-items:center; justify-content:center;
+  }
+  .hero-badge{
+    position:absolute; top:-10px; right:10px;
+    width:118px; height:118px; border-radius:50%;
+    background:var(--peach);
+    display:flex; align-items:center; justify-content:center;
+    text-align:center; font-family:'Noto Serif Georgian',serif; font-weight:700;
+    font-size:13px; color:var(--brown); line-height:1.3;
+    transform:rotate(10deg);
+    box-shadow:0 14px 30px -12px rgba(226,154,124,0.8);
+    border:2px dashed rgba(59,42,32,0.25);
+    z-index:3;
+  }
+  .hero-plate{
+    width:100%; aspect-ratio:1/1; max-width:420px;
+    border-radius:50%;
+    background:
+      radial-gradient(circle at 32% 28%, #fff6, transparent 40%),
+      linear-gradient(135deg, var(--beige), var(--peach) 60%, var(--rose));
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 40px 70px -30px rgba(59,42,32,0.45);
+    position:relative;
+  }
+  .hero-plate::before{
+    content:'';
+    position:absolute; inset:22px;
+    border-radius:50%;
+    border:2px solid rgba(255,255,255,0.55);
+  }
+  .hero-plate .emoji{font-size:110px; filter:drop-shadow(0 14px 18px rgba(59,42,32,0.25));}
+
+  /* ---------- SECTION TITLES ---------- */
+  .section{padding:90px 0;}
+  .section.alt{background:var(--cream-soft);}
+  .section-head{text-align:center; max-width:640px; margin:0 auto 50px;}
+  .section-head .eyebrow{display:flex; justify-content:center;}
+  .section-head h2{font-size:clamp(32px,4vw,44px); margin-bottom:14px;}
+  .section-head p{color:var(--brown-mid); font-size:16px;}
+
+  /* ---------- MENU TABS ---------- */
+  .tabs{
+    display:flex; justify-content:center; gap:12px; flex-wrap:wrap;
+    margin-bottom:46px;
+  }
+  .tab-btn{
+    padding:12px 24px; border-radius:999px;
+    background:#fff; border:1.5px solid var(--line);
+    font-weight:600; font-size:14.5px; color:var(--brown-mid);
+    transition:all .25s ease;
+  }
+  .tab-btn.active{
+    background:var(--brown); color:var(--cream); border-color:var(--brown);
+    box-shadow:0 10px 22px -12px rgba(59,42,32,0.6);
+  }
+  .tab-btn:hover:not(.active){border-color:var(--peach-deep); color:var(--brown);}
+
+  .menu-grid{
+    display:grid; grid-template-columns:repeat(auto-fill,minmax(240px,1fr));
+    gap:26px;
+  }
+  .food-card{
+    background:#fff; border-radius:22px; overflow:hidden;
+    box-shadow:0 16px 30px -20px rgba(59,42,32,0.35);
+    cursor:pointer; transition:transform .3s ease, box-shadow .3s ease;
+    border:1px solid var(--line);
+    display:flex; flex-direction:column;
+  }
+  .food-card:hover{transform:translateY(-6px); box-shadow:0 26px 40px -20px rgba(59,42,32,0.4);}
+  .food-thumb{
+    aspect-ratio:4/3; width:100%;
+    display:flex; align-items:center; justify-content:center;
+    font-size:54px;
+    position:relative;
+    overflow:hidden;
+  }
+  .food-thumb img{
+    width:100%; height:100%; object-fit:cover; position:relative; z-index:1;
+  }
+  .food-thumb .ring{
+    position:absolute; inset:14px; border-radius:16px;
+    border:1.5px dashed rgba(255,255,255,0.6);
+    z-index:2; pointer-events:none;
+  }
+  .food-body{padding:16px 18px 20px; display:flex; flex-direction:column; gap:6px; flex:1;}
+  .food-body h4{font-size:16.5px; font-weight:600; font-family:'Noto Sans Georgian';}
+  .food-price{
+    margin-top:auto; display:flex; align-items:center; justify-content:space-between;
+    font-family:'Noto Serif Georgian',serif; font-weight:700; color:var(--peach-deep); font-size:17px;
+  }
+  .food-price span.tap{
+    font-family:'Noto Sans Georgian'; font-weight:500; font-size:12.5px; color:var(--brown-soft);
+  }
+
+  /* thumb color variety by category (used as fallback background behind images) */
+  .c-pastry{background:linear-gradient(135deg,#F3D9B1,#E8B98C);}
+  .c-icecream{background:linear-gradient(135deg,#FBD8D8,#F0B7A4);}
+  .c-dessert{background:linear-gradient(135deg,#EAD4E8,#E6A8A0);}
+  .c-drink{background:linear-gradient(135deg,#CFE8DE,#A9D3C6);}
+
+  /* ---------- MODAL ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(59,42,32,0.55);
+    backdrop-filter:blur(4px);
+    display:flex; align-items:center; justify-content:center;
+    z-index:200; padding:20px;
+    opacity:0; pointer-events:none; transition:opacity .3s ease;
+  }
+  .modal-overlay.open{opacity:1; pointer-events:auto;}
+  .modal-box{
+    background:var(--cream); border-radius:28px; max-width:520px; width:100%;
+    overflow:hidden; box-shadow:0 40px 80px -20px rgba(0,0,0,0.5);
+    transform:translateY(30px) scale(.97); transition:transform .35s ease;
+    max-height:88vh; display:flex; flex-direction:column;
+  }
+  .modal-overlay.open .modal-box{transform:translateY(0) scale(1);}
+  .modal-img{
+    aspect-ratio:16/9; display:flex; align-items:center; justify-content:center;
+    font-size:100px; position:relative; flex-shrink:0;
+    overflow:hidden;
+  }
+  .modal-img img{
+    width:100%; height:100%; object-fit:cover;
+  }
+  .modal-content{padding:26px 30px 30px; overflow-y:auto;}
+  .modal-content h3{font-size:26px; margin-bottom:6px;}
+  .modal-price{
+    font-family:'Noto Serif Georgian',serif; color:var(--peach-deep); font-size:20px; font-weight:700; margin-bottom:18px;
+  }
+  .modal-section-label{
+    font-size:12.5px; text-transform:uppercase; letter-spacing:1.5px; font-weight:700;
+    color:var(--brown-soft); margin-bottom:8px; display:flex; align-items:center; gap:6px;
+  }
+  .modal-desc{
+    font-size:15px; color:var(--brown-mid); background:#fff; border:1px solid var(--line);
+    border-radius:14px; padding:16px 18px; margin-bottom:24px; line-height:1.65;
+  }
+  .modal-close{
+    width:100%; padding:15px; border-radius:999px; background:var(--brown); color:var(--cream);
+    font-weight:600; font-size:15px; transition:background .2s ease;
+  }
+  .modal-close:hover{background:#2c1f17;}
+  .modal-x{
+    position:absolute; top:16px; right:16px; width:38px; height:38px; border-radius:50%;
+    background:rgba(255,255,255,0.85); display:flex; align-items:center; justify-content:center;
+    font-size:18px; color:var(--brown); z-index:5;
+  }
+
+  /* ---------- ABOUT ---------- */
+  .about-grid{
+    display:grid; grid-template-columns:1fr 1fr; gap:60px; align-items:center;
+  }
+  .about-visual{
+    aspect-ratio:1/1; border-radius:32px;
+    background:linear-gradient(150deg, var(--beige), var(--peach) 70%);
+    display:flex; align-items:center; justify-content:center; font-size:90px;
+    box-shadow:var(--shadow);
+    position:relative;
+  }
+  .about-visual::after{
+    content:''; position:absolute; inset:18px; border-radius:24px; border:2px solid rgba(255,255,255,0.5);
+  }
+  .about-text h2{font-size:34px; margin-bottom:18px;}
+  .about-text p{color:var(--brown-mid); margin-bottom:16px; font-size:15.5px;}
+  .social-row{display:flex; gap:14px; margin-top:24px;}
+  .social-btn{
+    width:46px; height:46px; border-radius:50%; background:#fff; border:1.5px solid var(--line);
+    display:flex; align-items:center; justify-content:center; transition:all .25s ease;
+  }
+  .social-btn:hover{background:var(--brown); border-color:var(--brown);}
+  .social-btn:hover svg{fill:var(--cream);}
+  .social-btn svg{fill:var(--brown); width:19px; height:19px;}
+
+  .branches{
+    display:grid; grid-template-columns:1fr 1fr; gap:24px; margin-top:60px;
+  }
+  .branch-card{
+    background:#fff; border-radius:22px; padding:28px 26px; border:1px solid var(--line);
+    box-shadow:0 16px 30px -22px rgba(59,42,32,0.35);
+  }
+  .branch-card .tag{
+    display:inline-block; font-size:12px; letter-spacing:1px; text-transform:uppercase;
+    background:var(--cream-soft); color:var(--peach-deep); font-weight:700;
+    padding:5px 12px; border-radius:999px; margin-bottom:14px;
+  }
+  .branch-card h4{font-size:19px; margin-bottom:10px;}
+  .branch-row{display:flex; gap:10px; align-items:flex-start; margin-bottom:8px; font-size:14.5px; color:var(--brown-mid);}
+  .branch-row svg{width:17px;height:17px; fill:var(--peach-deep); flex-shrink:0; margin-top:2px;}
+
+  footer{
+    padding:38px 28px; text-align:center; color:var(--brown-soft); font-size:13.5px;
+    background:var(--brown); color:#E9DCCB;
+  }
+  footer .logo-f{font-family:'Noto Serif Georgian',serif; font-size:20px; color:#fff; margin-bottom:8px; font-weight:700;}
+
+  /* ---------- CHAT WIDGET ---------- */
+  .chat-fab{
+    position:fixed; bottom:26px; right:26px; z-index:150;
+    width:64px; height:64px; border-radius:50%;
+    background:linear-gradient(135deg, var(--peach), var(--rose));
+    display:flex; align-items:center; justify-content:center;
+    box-shadow:0 16px 34px -10px rgba(226,154,124,0.85);
+    transition:transform .25s ease;
+  }
+  .chat-fab:hover{transform:scale(1.08);}
+  .chat-fab svg{width:28px; height:28px; fill:#fff;}
+  .chat-panel{
+    position:fixed; bottom:104px; right:26px; z-index:150;
+    width:360px; max-width:90vw; max-height:70vh;
+    background:var(--cream); border-radius:26px; overflow:hidden;
+    box-shadow:0 30px 60px -18px rgba(59,42,32,0.5);
+    display:flex; flex-direction:column;
+    transform:translateY(20px) scale(.96); opacity:0; pointer-events:none;
+    transition:all .3s ease;
+    border:1px solid var(--line);
+  }
+  .chat-panel.open{transform:translateY(0) scale(1); opacity:1; pointer-events:auto;}
+  .chat-head{
+    background:linear-gradient(135deg, var(--peach), var(--rose));
+    padding:18px 20px; color:#fff; display:flex; align-items:center; gap:12px;
+  }
+  .chat-avatar{
+    width:38px; height:38px; border-radius:50%; background:rgba(255,255,255,0.3);
+    display:flex; align-items:center; justify-content:center; font-size:18px;
+  }
+  .chat-head-title{font-weight:700; font-size:15px;}
+  .chat-head-sub{font-size:12px; opacity:.9; display:flex; align-items:center; gap:5px;}
+  .chat-head-sub .dot{width:6px;height:6px;border-radius:50%;background:#7CE29B;}
+  .chat-close{margin-left:auto; width:28px;height:28px;display:flex;align-items:center;justify-content:center; color:#fff; font-size:16px;}
+  .chat-body{
+    flex:1; overflow-y:auto; padding:18px 16px; display:flex; flex-direction:column; gap:12px;
+  }
+  .bubble{
+    max-width:85%; padding:12px 15px; border-radius:16px; font-size:14px; line-height:1.5;
+    white-space:pre-wrap;
+  }
+  .bubble.bot{background:#fff; border:1px solid var(--line); border-bottom-left-radius:4px; align-self:flex-start; color:var(--brown);}
+  .bubble.user{background:var(--brown); color:var(--cream); border-bottom-right-radius:4px; align-self:flex-end;}
+  .quick-replies{display:flex; flex-wrap:wrap; gap:8px; margin-top:4px;}
+  .quick-chip{
+    padding:9px 14px; border-radius:999px; background:#fff; border:1.3px solid var(--peach-deep);
+    color:var(--peach-deep); font-size:12.8px; font-weight:600; transition:all .2s ease;
+  }
+  .quick-chip:hover{background:var(--peach-deep); color:#fff;}
+  .chat-input-row{
+    display:flex; gap:10px; padding:14px 16px; border-top:1px solid var(--line); background:#fff;
+  }
+  .chat-input-row input{
+    flex:1; border:1.5px solid var(--line); border-radius:999px; padding:11px 16px; font-size:13.5px;
+    font-family:inherit; outline:none; background:var(--cream-soft);
+  }
+  .chat-input-row input:focus{border-color:var(--peach-deep);}
+  .chat-send{
+    width:42px; height:42px; border-radius:50%; background:var(--brown); color:var(--cream);
+    display:flex; align-items:center; justify-content:center; flex-shrink:0;
+  }
+  .chat-send svg{width:17px; height:17px; fill:var(--cream);}
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 900px){
+    .hero-inner{grid-template-columns:1fr; text-align:center;}
+    .hero p.tagline{margin-left:auto; margin-right:auto;}
+    .cta-row{justify-content:center;}
+    .eyebrow{justify-content:center;}
+    .about-grid{grid-template-columns:1fr;}
+    .about-visual{max-width:340px; margin:0 auto;}
+    .branches{grid-template-columns:1fr;}
+  }
+  @media (max-width: 760px){
+    .nav-links{
+      position:fixed; top:70px; left:0; right:0; background:var(--cream);
+      flex-direction:column; padding:20px 28px; gap:20px;
+      border-bottom:1px solid var(--line);
+      transform:translateY(-130%); transition:transform .3s ease; z-index:50;
+    }
+    .nav-links.open{transform:translateY(0);}
+    .burger{display:flex;}
+    .chat-panel{right:12px; bottom:96px; width:94vw;}
+    .chat-fab{right:16px; bottom:16px;}
+  }
+</style>
+</head>
+<body>
+
+<!-- ================= NAV ================= -->
+<header>
+  <nav>
+    <a href="#home" class="logo"><span class="dot"></span>ნილე</a>
+    <ul class="nav-links" id="navLinks">
+      <li><a href="#home">მთავარი</a></li>
+      <li><a href="#menu">მენიუ</a></li>
+      <li><a href="#about">ჩვენ შესახებ</a></li>
+      <li><a href="#branches">ფილიალები</a></li>
+      <li class="mobile-only" style="display:none;"><a href="#" onclick="toggleChat(true);return false;">AI ასისტენტი</a></li>
+    </ul>
+    <div style="display:flex; align-items:center; gap:14px;">
+      <button class="chat-btn" onclick="toggleChat(true)">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.02 2 11c0 2.62 1.28 4.97 3.35 6.61-.13.99-.5 2.36-1.31 3.62 0 0 2.32-.3 4.4-1.71.79.19 1.63.29 2.56.29 5.52 0 10-4.02 10-9S17.52 2 12 2z"/></svg>
+        AI ჩატი
+      </button>
+      <div class="burger" onclick="document.getElementById('navLinks').classList.toggle('open')">
+        <span></span><span></span><span></span>
+      </div>
+    </div>
+  </nav>
+</header>
+
+<!-- ================= HERO ================= -->
+<section class="hero" id="home">
+  <div class="hero-inner">
+    <div>
+      <div class="eyebrow">დღიურად გამომცხვარი • 2 ფილიალი</div>
+      <h1>სიახლე, სითბო<br>და გემო — <em>ნილესგან</em></h1>
+      <p class="tagline">ყოველდღე, დილიდან, ჩვენს საცხობებში იბადება ხელნაკეთი ცომეული, ნაზი დესერტები და გამაგრილებელი სასმელები — ყველაფერი მხოლოდ ნატურალური ინგრედიენტებით.</p>
+      <div class="cta-row">
+        <a href="#menu" class="btn-primary">
+          მენიუს დათვალიერება
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
+        </a>
+        <a href="#about" class="btn-secondary">ჩვენ შესახებ</a>
+      </div>
+    </div>
+    <div class="hero-visual">
+      <div class="hero-badge">100%<br>ნატურალური</div>
+       <div class="about-visual">
+  <img src="nayinimtav.jpg" alt="ჩვენ შესახებ - ნილე" class="about-img">
+</div>
+  </div>
+</section>
+<svg class="scallop scallop-top" viewBox="0 0 1200 28" preserveAspectRatio="none"><path d="M0,0 Q15,28 30,0 Q45,28 60,0 Q75,28 90,0 Q105,28 120,0 Q135,28 150,0 Q165,28 180,0 Q195,28 210,0 Q225,28 240,0 Q255,28 270,0 Q285,28 300,0 Q315,28 330,0 Q345,28 360,0 Q375,28 390,0 Q405,28 420,0 Q435,28 450,0 Q465,28 480,0 Q495,28 510,0 Q525,28 540,0 Q555,28 570,0 Q585,28 600,0 Q615,28 630,0 Q645,28 660,0 Q675,28 690,0 Q705,28 720,0 Q735,28 750,0 Q765,28 780,0 Q795,28 810,0 Q825,28 840,0 Q855,28 870,0 Q885,28 900,0 Q915,28 930,0 Q945,28 960,0 Q975,28 990,0 Q1005,28 1020,0 Q1035,28 1050,0 Q1065,28 1080,0 Q1095,28 1110,0 Q1125,28 1140,0 Q1155,28 1170,0 Q1185,28 1200,0 L1200,0 L0,0 Z"/></svg>
+
+<!-- ================= MENU ================= -->
+<section class="section" id="menu" style="background:var(--cream-soft); padding-top:20px;">
+  <div class="wrap">
+    <div class="section-head">
+      <div class="eyebrow">ჩვენი მენიუ</div>
+      <h2>აირჩიეთ თქვენი ფავორიტი</h2>
+      <p>დააჭირეთ ნებისმიერ პროდუქტს — ნახავთ დეტალურ შემადგენლობასა და ალერგენების ინფორმაციას.</p>
+    </div>
+    <div class="tabs" id="tabs"></div>
+    <div class="menu-grid" id="menuGrid"></div>
+  </div>
+</section>
+
+<!-- ================= ABOUT ================= -->
+<section class="section" id="about">
+  <div class="wrap">
+    <div class="about-grid">
+    <div class="about-visual">
+  <img src="chvenshesaxeb.jpg" alt="ჩვენ შესახებ - ნილე" class="about-img">
+</div>
+      <div class="about-text">
+        <div class="eyebrow">ჩვენ შესახებ</div>
+        <h2>ნილე — სადაც ცომეული სახლის სუნით ივსება</h2>
+        <p>ნილე დაარსდა ერთი მარტივი მიზნით: მოგვეტანა ჩვენს მეზობლებამდე ის გემო, რასაც ბავშვობაში ბებიების სამზარეულოში ვგრძნობდით. ყოველი ლობიანი, ხაჭაპური და დესერტი მზადდება ხელით, ადგილობრივი ინგრედიენტებით, სიყვარულით.</p>
+        <p>ჩვენი გუნდი ყოველდღე დილაადრიან იწყებს მუშაობას, რათა თქვენამდე მხოლოდ ახალი და თბილი პროდუქცია მიაღწიოს — ორივე ფილიალში, ერთნაირი ხარისხით.</p>
+        <div class="social-row">
+          <!-- ფეისბუქის გასწორებული ბლოკი -->
+          <a class="social-btn" href="https://www.facebook.com/profile.php?id=61574543782986" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
+            <svg viewBox="0 0 24 24">
+              <path d="M22 12c0-5.52-4.48-10-10-10S2 6.48 2 12c0 4.84 3.44 8.87 8 9.8V15H8v-3h2V9.5C10 7.57 11.57 6 13.5 6H16v3h-2c-.55 0-1 .45-1 1v2h3v3h-3v6.95c4.56-.93 8-4.96 8-9.75z"/>
+            </svg>
+          </a>
+          <!-- ინსტაგრამის ბლოკი -->
+          <a class="social-btn" href="#" aria-label="Instagram" title="Instagram">
+            <svg viewBox="0 0 24 24"><path d="M12 2c-2.72 0-3.06.01-4.12.06-1.06.05-1.79.22-2.43.47-.66.26-1.22.6-1.77 1.16-.56.55-.9 1.11-1.16 1.77-.25.64-.42 1.37-.47 2.43C2 8.94 2 9.28 2 12s.01 3.06.06 4.12c.05 1.06.22 1.79.47 2.43.26.66.6 1.22 1.16 1.77.55.56 1.11.9 1.77 1.16.64.25 1.37.42 2.43.47C8.94 22 9.28 22 12 22s3.06-.01 4.12-.06c1.06-.05 1.79-.22 2.43-.47.66-.26 1.22-.6 1.77-1.16.56-.55.9-1.11 1.16-1.77.25-.64.42-1.37.47-2.43.05-1.06.06-1.4.06-4.12s-.01-3.06-.06-4.12c-.05-1.06-.22-1.79-.47-2.43-.26-.66-.6-1.22-1.16-1.77-.55-.56-1.11-.9-1.77-1.16-.64-.25-1.37-.42-2.43-.47C15.06 2.01 14.72 2 12 2Zm0 1.8c2.67 0 2.99.01 4.04.06.98.04 1.5.21 1.85.34.47.18.8.4 1.15.75.35.35.57.68.75 1.15.13.35.3.87.34 1.85.05 1.05.06 1.37.06 4.04s-.01 2.99-.06 4.04c-.04.98-.21 1.5-.34 1.85-.18.47-.4.8-.75 1.15-.35.35-.68.57-1.15.75-.35.13-.87.3-1.85.34-1.05.05-1.37.06-4.04.06s-2.99-.01-4.04-.06c-.98-.04-1.5-.21-1.85-.34-.47-.18-.8-.4-1.15-.75-.35-.35-.57-.68-.75-1.15-.13-.35-.3-.87-.34-1.85C3.81 14.99 3.8 14.67 3.8 12s.01-2.99.06-4.04c.04-.98.21-1.5.34-1.85.18-.47.4-.8.75-1.15.35-.35.68-.57 1.15-.75.35-.13.87-.3 1.85-.34C9.01 3.81 9.33 3.8 12 3.8Zm0 3.05a5.15 5.15 0 1 0 0 10.3 5.15 5.15 0 0 0 0-10.3Zm0 8.5a3.35 3.35 0 1 1 0-6.7 3.35 3.35 0 0 1 0 6.7Zm5.36-8.7a1.2 1.2 0 1 1-2.4 0 1.2 1.2 0 0 1 2.4 0Z"/></svg>
+          </a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+    <div class="branches" id="branches">
+      <div class="branch-card">
+        <span class="tag">ფილიალი 1</span>
+        <h4>ნილე — დიღმის მასივი</h4>
+        <div class="branch-row">
+          <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+          <span>მისამართი: დიღმის მასივი 5ა, Tbilisi, Georgia, 0160, თბილისი</span>
+        </div>
+        <div class="branch-row">
+          <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C11.6 21 3 12.4 3 2.9c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1.1L6.6 10.8Z"/></svg>
+          <span>ტელეფონი: +995 558000032</span>
+        </div>
+      </div>
+      <div class="branch-card">
+        <span class="tag">ფილიალი 2</span>
+        <h4>ნილე — დიდი დიღომი</h4>
+        <div class="branch-row">
+          <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
+          <span>მისამართი: 6 ნესტან-დარეჯანის ქუჩა, Tbilisi, დიდი დიღომის რაიონი, თბილისი</span>
+        </div>
+        <div class="branch-row">
+          <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C11.6 21 3 12.4 3 2.9c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1.1L6.6 10.8Z"/></svg>
+          <span>ტელეფონი: +995 558000032</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="logo-f">ნილე</div>
+  <div>© 2026 ნილე — ყველა უფლება დაცულია</div>
+</footer>
+
+<!-- ================= MODAL ================= -->
+<div class="modal-overlay" id="modalOverlay" onclick="if(event.target===this) closeModal()">
+  <div class="modal-box">
+    <div class="modal-img" id="modalImg"></div>
+    <div class="modal-content">
+      <h3 id="modalTitle">სახელი</h3>
+      <div class="modal-price" id="modalPrice">0.00 ₾</div>
+      <div class="modal-section-label">✧ შემადგენლობა</div>
+      <div class="modal-desc" id="modalDesc">აღწერა</div>
+      <button class="modal-close" onclick="closeModal()">უკან დაბრუნება</button>
+    </div>
+  </div>
+</div>
+
+<!-- ================= CHAT WIDGET ================= -->
+<button class="chat-fab" onclick="toggleChat()" aria-label="AI ჩატი">
+  <svg viewBox="0 0 24 24"><path d="M12 2C6.48 2 2 6.02 2 11c0 2.62 1.28 4.97 3.35 6.61-.13.99-.5 2.36-1.31 3.62 0 0 2.32-.3 4.4-1.71.79.19 1.63.29 2.56.29 5.52 0 10-4.02 10-9S17.52 2 12 2z"/></svg>
+</button>
+
+<div class="chat-panel" id="chatPanel">
+  <div class="chat-head">
+    <div class="chat-avatar">🍰</div>
+    <div>
+      <div class="chat-head-title">ნილეს AI თანაშემწე</div>
+      <div class="chat-head-sub"><span class="dot"></span>ონლაინ</div>
+    </div>
+    <button class="chat-close" onclick="toggleChat(false)">✕</button>
+  </div>
+  <div class="chat-body" id="chatBody">
+    <div class="bubble bot">გამარჯობა! 👋 მე ვარ ნილეს ვირტუალური თანაშემწე. შემიძლია გითხრათ მენიუზე, ფასებზე, ფილიალებზე, სამუშაო საათებსა თუ ნებისმიერ სხვა კითხვაზე — მკითხეთ რაც გაინტერესებთ!</div>
+    <div class="quick-replies">
+      <button class="quick-chip" onclick="sendQuick('რას მირჩევთ?')">რას მირჩევთ?</button>
+      <button class="quick-chip" onclick="sendQuick('რომელი ფილიალია უფრო ახლოს?')">რომელი ფილიალია უფრო ახლოს?</button>
+      <button class="quick-chip" onclick="sendQuick('სამუშაო საათები?')">სამუშაო საათები?</button>
+    </div>
+  </div>
+  <div class="chat-input-row">
+    <input type="text" id="chatInput" placeholder="დაწერეთ შეკითხვა..." onkeydown="if(event.key==='Enter') sendChat()">
+    <button class="chat-send" onclick="sendChat()">
+      <svg viewBox="0 0 24 24"><path d="M2 21l21-9L2 3v7l15 2-15 2z"/></svg>
+    </button>
+  </div>
+</div>
+
+<script>
+/* ============== MENU DATA ============== */
+const MENU = {
+  "ცომეულობა": {
+    icon: "kubdari.jpg", cls: "c-pastry",
+    items: [
+      { n: "ლობიანი", p: 6.00, img: "lobianilorisugareshodgareshe.jpg", d: "ცომში გახვეული არომატული ლობიო, ხახვითა და სანელებლებით." },
+      { n: "ლობიანი ლორით", p: 7.50, img: "lobianilorisugareshodgareshe.jpg", d: "ჩვენი საყვარელი ლობიანი, გამდიდრებული წვნიანი ლორით." },
+      { n: "ფენოვანი ლობიანი", p: 7.00, img: "fenlobiani.jpg", d: "ფენებად დაწყობილი, ხრაშუნა ცომი, გულუხვად სავსე ლობიოთი." },
+      { n: "ხაჭაპური (იმერული/მეგრული)", p: 6.50, img: "imerulikhachmegrulikhach.jpg", d: "კლასიკური ხაჭაპური, ცხელი, დნობადი ყველით." },
+      { n: "ფენოვანი ხაჭაპური", p: 7.30, img: "fenkhacha.jpg", d: "რბილი ცომი მსუბუქი ფენოვანი ტექსტურით და ბლომად ყველით." },
+      { n: "აჭარული ხაჭაპური", p: 8.00, img: "achma.jpg", d: "ნავის ფორმის ხაჭაპური, კვერცხითა და კარაქით." },
+      { n: "ხაბიძგინა", p: 7.50, img: "xabidzgina.jpg", d: "აფხაზური ხაჭაპური სიმინდის ფქვილითა და ყველით." },
+      { n: "კუბდარი", p: 8.50, img: "kubdari.jpg", d: "სვანური ტრადიციული პური, დაკეპილი ხორცისა და სანელებლების არომატული ნაზავით." },
+      { n: "გურული ღვეზელი", p: 6.80, img: "guruligvez.jpg", d: "გრძელი ფორმის ხაჭაპური, კვერცხითა და ყველით შიგნით." },
+      { n: "შაურმის ღვეზელი", p: 7.50, img: "shaurmisgvezeli.jpg", d: "შაურმის სტილის შიგთავსი, ცომში გახვეული." },
+      { n: "კარტოფილის ღვეზელი", p: 6.00, img: "sokkartgvezeli.jpg", d: "რბილი, კარაქიანი კარტოფილის შიგთავსი." },
+      { n: "პიცა", p: 9.50, img: "pica.jpg", d: "ხორცისხილული პიცა ზეთისხილით, ბულგარული წიწაკითა და ორცხობილათი." },
+      { n: "ფილონი", p: 6.50, img: "pichini.jpg", d: "ოსური ლუბიანი სოსისით." },
+      { n: "სენდვიჩი ლორით", p: 8.00, img: "sendvichi.jpg", d: "ახალი პური, წვნიანი ლორი, ყველი და ბოსტნეული." },
+      { n: "ჯოთ-დოგი", p: 6.50, img: "hotdog.jpg", d: "ცომში გამომცხვარი სოსისი — კლასიკური არჩევანი." },
+      { n: "ჯოთ-დოგი მწვანილით", p: 7.00, img: "hotdogi2.jpg", d: "ჯოთ-დოგი დამატებული სოუსებითა და მწვანილით." }
+    ]
+  },
+  "ნაყინი ბურთულებით": {
+    icon: "chitisrdze.jpg", cls: "c-icecream",
+    items: [
+      { n: "მარწყვის", p: 4.00, img: "", d: "ნაზი, კრემისებრი ნაყინი ნამდვილი მარწყვის არომატით." },
+      { n: "ვანილის", p: 4.00, img: "", d: "კლასიკური ვანილის ნაყინი." },
+      { n: "კარამელის", p: 4.20, img: "", d: "რბილი კარამელის ნოტებით გაჯერებული ნაყინი." },
+      { n: "შოკოლადის", p: 4.30, img: "", d: "ინტენსიური შოკოლადის ნაყინი." }
+    ]
+  },
+  "დესერტები": {
+    icon: "opera.jpg", cls: "c-dessert",
+    items: [
+      { n: "ხილის ტორტი", p: 9.00, img: "xilistorti.jpg", d: "გაბაფხულის სურნელი, თითოეულ ნაჭერში — ხილით მორთული ნაზი ტორტი." },
+      { n: "ბეზეს ტორტი", p: 8.50, img: "bezestorti.jpg", d: "ხრაშუნა ბეზეს ფენები, ნაზი კრემით, ლენტით შეკრული." },
+      { n: "ჩიტის რძე", p: 6.50, img: "chitisrdze.jpg", d: "ჩოკოლადში ჩავლილი, საფუარიანი ბისკვიტის ბაზაზე დამზადებული ტკბილი დესერტი." },
+      { n: "ჩიზქეიქი", p: 6.00, img: "chizkeik.jpg", d: "გაყინული ჩიზქეიქი მანგოს ჟელეთი." },
+      { n: "ფისტას დესერტი", p: 7.50, img: "fistasdesert.jpg", d: "ბაზილიკითა და ჟოლოთი გაფორმებული, პისტას კრემიანი დესერტი." },
+      { n: "ნაპოლეონი", p: 6.50, img: "napoleoni.jpg", d: "ფენოვანი, ხრაშუნა ცომის ფენები, ნაზი კრემით." },
+      { n: "ოპერა ტორტი", p: 7.50, img: "opera.jpg", d: "ყავის არომატიანი ბისკვიტი, გამდიდრებული შოკოლადითა და კრემით." },
+      { n: "სამი შოკოლადის გრანულები", p: 8.00, img: "samishok.jpg", d: "სამი შოკოლადის (მუქი, რძიანი, თეთრი) გრანულებისგან შემდგარი დესერტი." },
+      { n: "სუფლე ბანანით", p: 6.80, img: "suflebananit.jpg", d: "ნაზი, ბანანის არომატიანი სუფლე ჩოკოლადის ბაზაზე." },
+      { n: "ტარტალეტკა", p: 5.50, img: "tartaletka.jpg", d: "შოკოლადის და მარწყვის კრემით სავსე ტარტალეტკები." },
+      { n: "ტროპიკანკა", p: 7.00, img: "tropikanka.jpg", d: "ტროპიკული ხილის სიტკბო, თითოეულ ლუკმაში." },
+      { n: "თხილის ნამცხვარი", p: 6.50, img: "txilisnamcxvari.jpg", d: "სამი შოკოლადის გრანულებით შემკული, თხილის არომატიანი ნამცხვარი." },
+      { n: "ყავის კრემ-ბრულე დესერტი", p: 7.20, img: "yaviskrembrul.jpg", d: "ყავის არომატიანი კრემ-ბრულეს დესერტი." },
+      { n: "კარამელიტა", p: 6.00, img: "karamelita.jpg", d: "კარამელით დაფარული, თხილის ნატეხებით შემკული დესერტი." },
+      { n: "მარწყვის ეკლერი", p: 5.50, img: "marwyvisekleri.jpg", d: "რბილი ეკლერის ცომი, მარწყვის კრემით სავსე." },
+      { n: "მედოქი", p: 6.50, img: "medoki.jpg", d: "თაფლის ფენოვანი ნამცხვარი კრემით." },
+      { n: "თხილის ნაწილაკები", p: 5.00, img: "natpenkha.jpg", d: "ხრაშუნა ხაჭაპურის ნაწილაკები." },
+      { n: "ხინკალის ნამცხვარი", p: 5.50, img: "khinamcxvari.jpg", d: "ხინკლის ფორმის ტკბილი დესერტი." }
+    ]
+  },
+  "სასმელები": {
+    icon: "hotdog.jpg", cls: "c-drink",
+    items: [
+      { n: "წვენები", p: 3.50, img: "", d: "ბუნებრივი, ახლად გამოწურული ხილის წვენი." },
+      { n: "წყალი", p: 1.50, img: "", d: "სუფთა, გამაგრილებელი სასმელი წყალი." },
+      { n: "კოკაკოლა კლასიკი", p: 3.00, img: "", d: "საყვარელი გაზიანი სასმელი." },
+      { n: "ფანტა", p: 3.00, img: "", d: "ფორთოხლის არომატის ნათელი, გამაგრილებელი გაზიანი სასმელი." },
+      { n: "ლიმონათი", p: 3.50, img: "", d: "ქართული ტრადიციული ლიმონათი." }
+    ]
+  }
+};
+
+const tabsEl = document.getElementById('tabs');
+const gridEl = document.getElementById('menuGrid');
+const categories = Object.keys(MENU);
+let activeCat = categories[0];
+
+function renderTabs(){
+  tabsEl.innerHTML = categories.map(c =>
+    `<button class="tab-btn ${c===activeCat?'active':''}" data-cat="${c}">${c}</button>`
+  ).join('');
+  tabsEl.querySelectorAll('.tab-btn').forEach(btn=>{
+    btn.addEventListener('click', ()=>{ activeCat = btn.dataset.cat; renderTabs(); renderGrid(); });
+  });
+}
+
+function renderGrid(){
+  const cat = MENU[activeCat];
+  gridEl.innerHTML = cat.items.map((item, idx) => `
+    <div class="food-card" data-cat="${activeCat}" data-idx="${idx}">
+      <div class="food-thumb ${cat.cls}">
+        <div class="ring"></div>
+        ${item.img ? `<img src="${item.img}" alt="${item.n}">` : ''}
+      </div>
+      <div class="food-body">
+        <h4>${item.n}</h4>
+        <div class="food-price">${item.p.toFixed(2)} ₾ <span class="tap">დეტალურად ›</span></div>
+      </div>
+    </div>
+  `).join('');
+  gridEl.querySelectorAll('.food-card').forEach(card=>{
+    card.addEventListener('click', ()=>{
+      const cat = card.dataset.cat, idx = card.dataset.idx;
+      openModal(cat, idx);
+    });
+  });
+}
+
+renderTabs();
+renderGrid();
+
+/* ============== MODAL ============== */
+const modalOverlay = document.getElementById('modalOverlay');
+function openModal(cat, idx){
+  const item = MENU[cat].items[idx];
+  const modalImgEl = document.getElementById('modalImg');
+  modalImgEl.className = 'modal-img ' + MENU[cat].cls;
+  modalImgEl.innerHTML =
+    `<button class="modal-x" onclick="closeModal()">✕</button>` +
+    (item.img ? `<img src="${item.img}" alt="${item.n}">` : '');
+  document.getElementById('modalTitle').textContent = item.n;
+  document.getElementById('modalPrice').textContent = item.p.toFixed(2) + ' ₾';
+  document.getElementById('modalDesc').textContent = item.d;
+  modalOverlay.classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+function closeModal(){
+  modalOverlay.classList.remove('open');
+  document.body.style.overflow = '';
+}
+document.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeModal(); });
+
+/* ============== CHAT WIDGET ============== */
+const chatPanel = document.getElementById('chatPanel');
+const chatBody = document.getElementById('chatBody');
+
+function toggleChat(force){
+  const willOpen = typeof force === 'boolean' ? force : !chatPanel.classList.contains('open');
+  chatPanel.classList.toggle('open', willOpen);
+}
+
+function addBubble(text, who){
+  const b = document.createElement('div');
+  b.className = 'bubble ' + who;
+  b.textContent = text;
+  chatBody.appendChild(b);
+  chatBody.scrollTop = chatBody.scrollHeight;
+}
+
+/* Flatten menu for lookups */
+const ALL_ITEMS = [];
+Object.keys(MENU).forEach(cat=>{
+  MENU[cat].items.forEach(it=> ALL_ITEMS.push({...it, cat}));
+});
+
+function findItemByName(t){
+  return ALL_ITEMS.find(it => t.includes(it.n.toLowerCase()));
+}
+
+function listCategory(cat){
+  const names = MENU[cat].items.map(it=>`${it.n} (${it.p.toFixed(2)} ₾)`);
+  return `${cat}-ის მენიუ:\n` + names.join(', ');
+}
+
+function botReply(userText){
+  const t = userText.toLowerCase();
+  let reply = null;
+
+  // greetings
+  if(/^(გამარჯობა|სალამი|ჰეი|hi|hello)/.test(t)){
+    reply = "გამარჯობა! 😊 მზად ვარ დაგეხმაროთ — მკითხეთ მენიუზე, ფასებზე, ფილიალებზე ან რასაც კი გინდათ ნილეზე.";
+  }
+  // thanks
+  else if(t.includes('მადლობ') || t.includes('გმადლობთ')){
+    reply = "სიამოვნებით! 🍰 კიდევ რამეში დაგეხმაროთ?";
+  }
+  // specific item lookup
+  else if(findItemByName(t)){
+    const item = findItemByName(t);
+    reply = `${item.n} — ${item.p.toFixed(2)} ₾. ${item.d} შეგიძლიათ ნახოთ „${item.cat}“ კატეგორიაში მენიუს სექციაში.`;
+  }
+  // category-specific questions
+  else if(t.includes('ცომეულ') || t.includes('ლობიან') || t.includes('ხაჭაპურ')){
+    reply = listCategory('ცომეულობა');
+  }
+  else if(t.includes('ნაყინ')){
+    reply = listCategory('ნაყინი ბურთულებით');
+  }
+  else if(t.includes('დესერტ') || t.includes('ტკბილ')){
+    reply = listCategory('დესერტები');
+  }
+  else if(t.includes('სასმელ') || t.includes('წყალ') || t.includes('წვენ') || t.includes('კოკა') || t.includes('ფანტა')){
+    reply = listCategory('სასმელები');
+  }
+  // recommendation
+  else if(t.includes('მირჩევთ') || t.includes('რეკომენდაცი') || t.includes('რას ავირჩი') || t.includes('საუკეთესო')){
+    reply = "ჩვენი ყველაზე საყვარელია იმერული ხაჭაპური და ფენოვანი ლობიანი — ორივე ცხელ-ცხელი და ახლადგამომცხვარი! ტკბილეულისთვის კი გირჩევთ შუს ან ეკლერს.";
+  }
+  // full menu
+  else if(t.includes('მენიუ') && !t.includes('ფასი')){
+    reply = "ჩვენს მენიუში 4 კატეგორიაა: ცომეულობა, ნაყინი ბურთულებით, დესერტები და სასმელები — სულ 31 პროდუქტი. სცადეთ სთხოვოთ კონკრეტული კატეგორია, მაგ. „რა გაქვთ დესერტებში?“";
+  }
+  // branches / location
+  else if(t.includes('ფილიალ') || t.includes('მისამართ') || t.includes('ახლოს') || t.includes('სად ხართ')){
+    reply = "გვაქვს 2 ფილიალი — ნილე დიღმის მასივი და ნილე დიდი დიღომი. სრული მისამართები და ტელეფონის ნომრები იხილეთ გვერდის „ფილიალები“ სექციაში, ან მითხარით რომელ რაიონთან ხართ ახლოს და გირჩევთ ფილიალს.";
+  }
+  else if(t.includes('დიღმის მასივი')){
+    reply = "ნილე დიღმის მასივის ფილიალი მდებარეობს ვაკის რაიონში. ზუსტი მისამართი და ტელეფონი იხილეთ „ფილიალები“ სექციაში.";
+  }
+  else if(t.includes('დიდი დიღომი')){
+    reply = "ნილე დიდი დიღომის ფილიალი მდებარეობს დიდი დიღომის რაიონში. ზუსტი მისამართი და ტელეფონი იხილეთ „ფილიალები“ სექციაში.";
+  }
+  // hours
+  else if(t.includes('საათ') || t.includes('სამუშაო') || t.includes('ღიაა') || t.includes('იკეტ')){
+    reply = "ორივე ფილიალი ღიაა ყოველდღე 08:00-დან 22:00 საათამდე, შაბათ-კვირის ჩათვლით.";
+  }
+  // price
+  else if(t.includes('ფას') || t.includes('ღირს') || t.includes('რა ღირს')){
+    reply = "ფასები იწყება 1.50 ₾-დან (წყალი) და აღწევს 9 ₾-მდე (შუ). ცომეული საშუალოდ 6-8.5 ₾, დესერტები 5.5-9 ₾, ნაყინი 4-4.3 ₾, სასმელები 1.5-3.5 ₾. ზუსტი ფასები ნახეთ მენიუს სექციაში, პროდუქტზე დაწკაპუნებით."
+  }
+  // delivery / order
+  else if(t.includes('მიტან') || t.includes('შეკვეთ') || t.includes('დელივერ') || t.includes('ონლაინ')){
+    reply = "ამჟამად პირდაპირი ონლაინ შეკვეთა საიტზე არ არის ხელმისაწვდომი — გთხოვთ დაგვირეკოთ ფილიალის ნომერზე შეკვეთისთვის ან ეწვიოთ პირადად. მალე გავხსნით ონლაინ შეკვეთის შესაძლებლობასაც!";
+  }
+  // social
+  else if(t.includes('ინსტაგრამ') || t.includes('ფეისბუქ') || t.includes('სოც')){
+    reply = "გვიპოვით Facebook-სა და Instagram-ზე — ბმულები იხილეთ „ჩვენ შესახებ“ სექციაში. მოგვყევით ახალი პროდუქტებისა და აქციების სანახავად!";
+  }
+  // about
+  else if(t.includes('ნილე რა') || t.includes('ვინ ხართ') || t.includes('თქვენ შესახებ') || t.includes('ისტორია')){
+    reply = "ნილე არის ოჯახური საცხობი და საკონდიტრო, სადაც ყოველდღე დილაადრიან ვამზადებთ ხელნაკეთ ცომეულს, დესერტებსა და სასმელებს — მხოლოდ ნატურალური ინგრედიენტებით. მეტი ინფორმაცია „ჩვენ შესახებ“ სექციაშია.";
+  }
+
+  if(!reply){
+    reply = "საინტერესო კითხვაა! შემიძლია გიპასუხოთ მენიუზე (მაგ. „რა გაქვთ ცომეულში?“), კონკრეტულ პროდუქტზე (მაგ. „რა არის კუბდარი?“), ფასებზე, ფილიალებზე, სამუშაო საათებზე ან ნილეს შესახებ ზოგადად. სცადეთ სხვაგვარად ჩამომიყალიბოთ შეკითხვა!";
+  }
+
+  setTimeout(()=> addBubble(reply, 'bot'), 500);
+}
+
+function sendChat(){
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if(!text) return;
+  addBubble(text, 'user');
+  input.value = '';
+  botReply(text);
+}
+
+function sendQuick(text){
+  addBubble(text, 'user');
+  botReply(text);
+}
+</script>
+</body>
+</html>
