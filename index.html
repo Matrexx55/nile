@@ -91,6 +91,15 @@
     transition:transform .2s ease, box-shadow .2s ease;
   }
   .chat-btn:hover{transform:translateY(-2px); box-shadow:0 12px 24px -8px rgba(226,154,124,0.85);}
+  .lang-btn{
+    padding:10px 18px; border-radius:999px;
+    border:1.5px solid var(--brown); color:var(--brown);
+    font-weight:700; font-size:13.5px; background:#fff;
+    transition:all .25s ease;
+    min-width:52px;
+    text-align:center;
+  }
+  .lang-btn:hover{background:var(--brown); color:var(--cream);}
   .burger{display:none; flex-direction:column; gap:5px;}
   .burger span{width:24px;height:2px;background:var(--brown);}
 
@@ -302,10 +311,12 @@
     display:flex; align-items:center; justify-content:center; font-size:90px;
     box-shadow:var(--shadow);
     position:relative;
+    overflow:hidden;
   }
   .about-visual::after{
     content:''; position:absolute; inset:18px; border-radius:24px; border:2px solid rgba(255,255,255,0.5);
   }
+  .about-visual img{width:100%; height:100%; object-fit:cover; border-radius:32px;}
   .about-text h2{font-size:34px; margin-bottom:18px;}
   .about-text p{color:var(--brown-mid); margin-bottom:16px; font-size:15.5px;}
   .social-row{display:flex; gap:14px; margin-top:24px;}
@@ -433,16 +444,17 @@
   <nav>
     <a href="#home" class="logo"><span class="dot"></span>ნილე</a>
     <ul class="nav-links" id="navLinks">
-      <li><a href="#home">მთავარი</a></li>
-      <li><a href="#menu">მენიუ</a></li>
-      <li><a href="#about">ჩვენ შესახებ</a></li>
-      <li><a href="#branches">ფილიალები</a></li>
-      <li class="mobile-only" style="display:none;"><a href="#" onclick="toggleChat(true);return false;">AI ასისტენტი</a></li>
+      <li><a href="#home" data-i18n="nav_home">მთავარი</a></li>
+      <li><a href="#menu" data-i18n="nav_menu">მენიუ</a></li>
+      <li><a href="#about" data-i18n="nav_about">ჩვენ შესახებ</a></li>
+      <li><a href="#branches" data-i18n="nav_branches">ფილიალები</a></li>
+      <li class="mobile-only" style="display:none;"><a href="#" onclick="toggleChat(true);return false;" data-i18n="nav_ai">AI ასისტენტი</a></li>
     </ul>
-    <div style="display:flex; align-items:center; gap:14px;">
+    <div style="display:flex; align-items:center; gap:12px;">
+      <button class="lang-btn" id="langBtn" onclick="toggleLang()" title="Switch language / ენის შეცვლა">EN</button>
       <button class="chat-btn" onclick="toggleChat(true)">
         <svg width="16" height="16" viewBox="0 0 24 24" fill="#fff"><path d="M12 2C6.48 2 2 6.02 2 11c0 2.62 1.28 4.97 3.35 6.61-.13.99-.5 2.36-1.31 3.62 0 0 2.32-.3 4.4-1.71.79.19 1.63.29 2.56.29 5.52 0 10-4.02 10-9S17.52 2 12 2z"/></svg>
-        AI ჩატი
+        <span data-i18n="chat_btn">AI ჩატი</span>
       </button>
       <div class="burger" onclick="document.getElementById('navLinks').classList.toggle('open')">
         <span></span><span></span><span></span>
@@ -455,19 +467,19 @@
 <section class="hero" id="home">
   <div class="hero-inner">
     <div>
-      <div class="eyebrow">დღიურად გამომცხვარი • 2 ფილიალი</div>
-      <h1>სიახლე, სითბო<br>და გემო — <em>ნილესგან</em></h1>
-      <p class="tagline">ყოველდღე, დილიდან, ჩვენს საცხობებში იბადება ხელნაკეთი ცომეული, ნაზი დესერტები და გამაგრილებელი სასმელები — ყველაფერი მხოლოდ ნატურალური ინგრედიენტებით.</p>
+      <div class="eyebrow" data-i18n="hero_eyebrow">დღიურად გამომცხვარი • 2 ფილიალი</div>
+      <h1 data-i18n-html="hero_h1">სიახლე, სითბო<br>და გემო — <em>ნილესგან</em></h1>
+      <p class="tagline" data-i18n="hero_tagline">ყოველდღე, დილიდან, ჩვენს საცხობებში იბადება ხელნაკეთი ცომეული, ნაზი დესერტები და გამაგრილებელი სასმელები — ყველაფერი მხოლოდ ნატურალური ინგრედიენტებით.</p>
       <div class="cta-row">
         <a href="#menu" class="btn-primary">
-          მენიუს დათვალიერება
+          <span data-i18n="cta_menu">მენიუს დათვალიერება</span>
           <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M13 6l6 6-6 6"/></svg>
         </a>
-        <a href="#about" class="btn-secondary">ჩვენ შესახებ</a>
+        <a href="#about" class="btn-secondary" data-i18n="cta_about">ჩვენ შესახებ</a>
       </div>
     </div>
     <div class="hero-visual">
-      <div class="hero-badge">100%<br>ნატურალური</div>
+      <div class="hero-badge" data-i18n-html="hero_badge">100%<br>ნატურალური</div>
        <div class="about-visual">
   <img src="nayinimtav.jpg" alt="ჩვენ შესახებ - ნილე" class="about-img">
 </div>
@@ -479,9 +491,9 @@
 <section class="section" id="menu" style="background:var(--cream-soft); padding-top:20px;">
   <div class="wrap">
     <div class="section-head">
-      <div class="eyebrow">ჩვენი მენიუ</div>
-      <h2>აირჩიეთ თქვენი ფავორიტი</h2>
-      <p>დააჭირეთ ნებისმიერ პროდუქტს — ნახავთ დეტალურ შემადგენლობასა და ალერგენების ინფორმაციას.</p>
+      <div class="eyebrow" data-i18n="menu_eyebrow">ჩვენი მენიუ</div>
+      <h2 data-i18n="menu_h2">აირჩიეთ თქვენი ფავორიტი</h2>
+      <p data-i18n="menu_p">დააჭირეთ ნებისმიერ პროდუქტს — ნახავთ დეტალურ შემადგენლობასა და ალერგენების ინფორმაციას.</p>
     </div>
     <div class="tabs" id="tabs"></div>
     <div class="menu-grid" id="menuGrid"></div>
@@ -496,10 +508,10 @@
   <img src="chvenshesaxeb.jpg" alt="ჩვენ შესახებ - ნილე" class="about-img">
 </div>
       <div class="about-text">
-        <div class="eyebrow">ჩვენ შესახებ</div>
-        <h2>ნილე — სადაც ცომეული სახლის სუნით ივსება</h2>
-        <p>ნილე დაარსდა ერთი მარტივი მიზნით: მოგვეტანა ჩვენს მეზობლებამდე ის გემო, რასაც ბავშვობაში ბებიების სამზარეულოში ვგრძნობდით. ყოველი ლობიანი, ხაჭაპური და დესერტი მზადდება ხელით, ადგილობრივი ინგრედიენტებით, სიყვარულით.</p>
-        <p>ჩვენი გუნდი ყოველდღე დილაადრიან იწყებს მუშაობას, რათა თქვენამდე მხოლოდ ახალი და თბილი პროდუქცია მიაღწიოს — ორივე ფილიალში, ერთნაირი ხარისხით.</p>
+        <div class="eyebrow" data-i18n="about_eyebrow">ჩვენ შესახებ</div>
+        <h2 data-i18n="about_h2">ნილე — სადაც ცომეული სახლის სუნით ივსება</h2>
+        <p data-i18n="about_p1">ნილე დაარსდა ერთი მარტივი მიზნით: მოგვეტანა ჩვენს მეზობლებამდე ის გემო, რასაც ბავშვობაში ბებიების სამზარეულოში ვგრძნობდით. ყოველი ლობიანი, ხაჭაპური და დესერტი მზადდება ხელით, ადგილობრივი ინგრედიენტებით, სიყვარულით.</p>
+        <p data-i18n="about_p2">ჩვენი გუნდი ყოველდღე დილაადრიან იწყებს მუშაობას, რათა თქვენამდე მხოლოდ ახალი და თბილი პროდუქცია მიაღწიოს — ორივე ფილიალში, ერთნაირი ხარისხით.</p>
         <div class="social-row">
           <!-- ფეისბუქის გასწორებული ბლოკი -->
           <a class="social-btn" href="https://www.facebook.com/profile.php?id=61574543782986" target="_blank" rel="noopener noreferrer" aria-label="Facebook" title="Facebook">
@@ -519,27 +531,27 @@
 
     <div class="branches" id="branches">
       <div class="branch-card">
-        <span class="tag">ფილიალი 1</span>
-        <h4>ნილე — დიღმის მასივი</h4>
+        <span class="tag" data-i18n="branch_tag1">ფილიალი 1</span>
+        <h4 data-i18n="branch1_h4">ნილე — დიღმის მასივი</h4>
         <div class="branch-row">
           <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
-          <span>მისამართი: დიღმის მასივი 5ა, Tbilisi, Georgia, 0160, თბილისი</span>
+          <span><span data-i18n="addr_label">მისამართი:</span> დიღმის მასივი 5ა, Tbilisi, Georgia, 0160, თბილისი</span>
         </div>
         <div class="branch-row">
           <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C11.6 21 3 12.4 3 2.9c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1.1L6.6 10.8Z"/></svg>
-          <span>ტელეფონი: +995 558000032</span>
+          <span><span data-i18n="phone_label">ტელეფონი:</span> +995 558000032</span>
         </div>
       </div>
       <div class="branch-card">
-        <span class="tag">ფილიალი 2</span>
-        <h4>ნილე — დიდი დიღომი</h4>
+        <span class="tag" data-i18n="branch_tag2">ფილიალი 2</span>
+        <h4 data-i18n="branch2_h4">ნილე — დიდი დიღომი</h4>
         <div class="branch-row">
           <svg viewBox="0 0 24 24"><path d="M12 2a7 7 0 0 0-7 7c0 5.25 7 13 7 13s7-7.75 7-13a7 7 0 0 0-7-7Zm0 9.5A2.5 2.5 0 1 1 12 6.5a2.5 2.5 0 0 1 0 5Z"/></svg>
-          <span>მისამართი: 6 ნესტან-დარეჯანის ქუჩა, Tbilisi, დიდი დიღომის რაიონი, თბილისი</span>
+          <span><span data-i18n="addr_label2">მისამართი:</span> 6 ნესტან-დარეჯანის ქუჩა, Tbilisi, დიდი დიღომის რაიონი, თბილისი</span>
         </div>
         <div class="branch-row">
           <svg viewBox="0 0 24 24"><path d="M6.6 10.8c1.4 2.8 3.8 5.2 6.6 6.6l2.2-2.2c.3-.3.7-.4 1-.2 1.1.4 2.3.6 3.6.6.6 0 1 .4 1 1V20c0 .6-.4 1-1 1C11.6 21 3 12.4 3 2.9c0-.6.4-1 1-1h3.4c.6 0 1 .4 1 1 0 1.3.2 2.5.6 3.6.1.4 0 .8-.2 1.1L6.6 10.8Z"/></svg>
-          <span>ტელეფონი: +995 558000032</span>
+          <span><span data-i18n="phone_label2">ტელეფონი:</span> +995 558000032</span>
         </div>
       </div>
     </div>
@@ -548,7 +560,7 @@
 
 <footer>
   <div class="logo-f">ნილე</div>
-  <div>© 2026 ნილე — ყველა უფლება დაცულია</div>
+  <div data-i18n="footer_text">© 2026 ნილე — ყველა უფლება დაცულია</div>
 </footer>
 
 <!-- ================= MODAL ================= -->
@@ -558,9 +570,9 @@
     <div class="modal-content">
       <h3 id="modalTitle">სახელი</h3>
       <div class="modal-price" id="modalPrice">0.00 ₾</div>
-      <div class="modal-section-label">✧ შემადგენლობა</div>
+      <div class="modal-section-label" id="modalIngredientsLabel">✧ შემადგენლობა</div>
       <div class="modal-desc" id="modalDesc">აღწერა</div>
-      <button class="modal-close" onclick="closeModal()">უკან დაბრუნება</button>
+      <button class="modal-close" id="modalCloseBtn" onclick="closeModal()">უკან დაბრუნება</button>
     </div>
   </div>
 </div>
@@ -574,17 +586,17 @@
   <div class="chat-head">
     <div class="chat-avatar">🍰</div>
     <div>
-      <div class="chat-head-title">ნილეს AI თანაშემწე</div>
-      <div class="chat-head-sub"><span class="dot"></span>ონლაინ</div>
+      <div class="chat-head-title" id="chatTitle">ნილეს AI თანაშემწე</div>
+      <div class="chat-head-sub"><span class="dot"></span><span id="chatOnline">ონლაინ</span></div>
     </div>
     <button class="chat-close" onclick="toggleChat(false)">✕</button>
   </div>
   <div class="chat-body" id="chatBody">
     <div class="bubble bot">გამარჯობა! 👋 მე ვარ ნილეს ვირტუალური თანაშემწე. შემიძლია გითხრათ მენიუზე, ფასებზე, ფილიალებზე, სამუშაო საათებსა თუ ნებისმიერ სხვა კითხვაზე — მკითხეთ რაც გაინტერესებთ!</div>
     <div class="quick-replies">
-      <button class="quick-chip" onclick="sendQuick('რას მირჩევთ?')">რას მირჩევთ?</button>
-      <button class="quick-chip" onclick="sendQuick('რომელი ფილიალია უფრო ახლოს?')">რომელი ფილიალია უფრო ახლოს?</button>
-      <button class="quick-chip" onclick="sendQuick('სამუშაო საათები?')">სამუშაო საათები?</button>
+      <button class="quick-chip" onclick="sendQuick(this.textContent)">რას მირჩევთ?</button>
+      <button class="quick-chip" onclick="sendQuick(this.textContent)">რომელი ფილიალია უფრო ახლოს?</button>
+      <button class="quick-chip" onclick="sendQuick(this.textContent)">სამუშაო საათები?</button>
     </div>
   </div>
   <div class="chat-input-row">
@@ -596,69 +608,123 @@
 </div>
 
 <script>
-/* ============== MENU DATA ============== */
+/* ============== I18N ============== */
+const I18N = {
+  ka: {
+    nav_home: "მთავარი", nav_menu: "მენიუ", nav_about: "ჩვენ შესახებ", nav_branches: "ფილიალები", nav_ai: "AI ასისტენტი",
+    chat_btn: "AI ჩატი",
+    hero_eyebrow: "დღიურად გამომცხვარი • 2 ფილიალი",
+    hero_h1: "სიახლე, სითბო<br>და გემო — <em>ნილესგან</em>",
+    hero_tagline: "ყოველდღე, დილიდან, ჩვენს საცხობებში იბადება ხელნაკეთი ცომეული, ნაზი დესერტები და გამაგრილებელი სასმელები — ყველაფერი მხოლოდ ნატურალური ინგრედიენტებით.",
+    cta_menu: "მენიუს დათვალიერება", cta_about: "ჩვენ შესახებ",
+    hero_badge: "100%<br>ნატურალური",
+    menu_eyebrow: "ჩვენი მენიუ", menu_h2: "აირჩიეთ თქვენი ფავორიტი",
+    menu_p: "დააჭირეთ ნებისმიერ პროდუქტს — ნახავთ დეტალურ შემადგენლობასა და ალერგენების ინფორმაციას.",
+    detail_tap: "დეტალურად ›",
+    modal_ingredients: "✧ შემადგენლობა", modal_close: "უკან დაბრუნება",
+    about_eyebrow: "ჩვენ შესახებ", about_h2: "ნილე — სადაც ცომეული სახლის სუნით ივსება",
+    about_p1: "ნილე დაარსდა ერთი მარტივი მიზნით: მოგვეტანა ჩვენს მეზობლებამდე ის გემო, რასაც ბავშვობაში ბებიების სამზარეულოში ვგრძნობდით. ყოველი ლობიანი, ხაჭაპური და დესერტი მზადდება ხელით, ადგილობრივი ინგრედიენტებით, სიყვარულით.",
+    about_p2: "ჩვენი გუნდი ყოველდღე დილაადრიან იწყებს მუშაობას, რათა თქვენამდე მხოლოდ ახალი და თბილი პროდუქცია მიაღწიოს — ორივე ფილიალში, ერთნაირი ხარისხით.",
+    branch_tag1: "ფილიალი 1", branch_tag2: "ფილიალი 2",
+    branch1_h4: "ნილე — დიღმის მასივი", branch2_h4: "ნილე — დიდი დიღომი",
+    addr_label: "მისამართი:", addr_label2: "მისამართი:", phone_label: "ტელეფონი:", phone_label2: "ტელეფონი:",
+    footer_text: "© 2026 ნილე — ყველა უფლება დაცულია",
+    chat_title: "ნილეს AI თანაშემწე", chat_online: "ონლაინ",
+    chat_greeting: "გამარჯობა! 👋 მე ვარ ნილეს ვირტუალური თანაშემწე. შემიძლია გითხრათ მენიუზე, ფასებზე, ფილიალებზე, სამუშაო საათებსა თუ ნებისმიერ სხვა კითხვაზე — მკითხეთ რაც გაინტერესებთ!",
+    quick1: "რას მირჩევთ?", quick2: "რომელი ფილიალია უფრო ახლოს?", quick3: "სამუშაო საათები?",
+    chat_placeholder: "დაწერეთ შეკითხვა..."
+  },
+  en: {
+    nav_home: "Home", nav_menu: "Menu", nav_about: "About", nav_branches: "Branches", nav_ai: "AI Assistant",
+    chat_btn: "AI Chat",
+    hero_eyebrow: "Freshly baked daily • 2 branches",
+    hero_h1: "Freshness, warmth<br>and flavor — <em>from Nile</em>",
+    hero_tagline: "Every day, from early morning, our bakeries create handmade pastries, delicate desserts and refreshing drinks — all made with only natural ingredients.",
+    cta_menu: "Browse the Menu", cta_about: "About Us",
+    hero_badge: "100%<br>Natural",
+    menu_eyebrow: "Our Menu", menu_h2: "Choose Your Favorite",
+    menu_p: "Tap on any product to see detailed ingredients and allergen information.",
+    detail_tap: "Details ›",
+    modal_ingredients: "✧ Ingredients", modal_close: "Back",
+    about_eyebrow: "About Us", about_h2: "Nile — Where Pastry Fills the Home with Its Aroma",
+    about_p1: "Nile was founded with one simple goal: to bring our neighbors the taste we felt in our grandmothers' kitchens as children. Every lobiani, khachapuri and dessert is made by hand, with local ingredients, and love.",
+    about_p2: "Our team starts work early every morning so that only fresh, warm products reach you — at both branches, with the same quality.",
+    branch_tag1: "Branch 1", branch_tag2: "Branch 2",
+    branch1_h4: "Nile — Dighmi Massive", branch2_h4: "Nile — Didi Dighomi",
+    addr_label: "Address:", addr_label2: "Address:", phone_label: "Phone:", phone_label2: "Phone:",
+    footer_text: "© 2026 Nile — All Rights Reserved",
+    chat_title: "Nile AI Assistant", chat_online: "Online",
+    chat_greeting: "Hello! 👋 I'm Nile's virtual assistant. I can tell you about the menu, prices, branches, working hours, or anything else — just ask!",
+    quick1: "What do you recommend?", quick2: "Which branch is closer?", quick3: "Working hours?",
+    chat_placeholder: "Type your question..."
+  }
+};
+
+let currentLang = 'ka';
+
+/* ============== MENU DATA (ka + en) ============== */
 const MENU = {
   "ცომეულობა": {
-    icon: "kubdari.jpg", cls: "c-pastry",
+    cls: "c-pastry", labels: { ka: "ცომეულობა", en: "Pastries" },
     items: [
-      { n: "ლობიანი", p: 6.00, img: "lobianilorisugareshodgareshe.jpg", d: "ცომში გახვეული არომატული ლობიო, ხახვითა და სანელებლებით." },
-      { n: "ლობიანი ლორით", p: 7.50, img: "lobianilorisugareshodgareshe.jpg", d: "ჩვენი საყვარელი ლობიანი, გამდიდრებული წვნიანი ლორით." },
-      { n: "ფენოვანი ლობიანი", p: 7.00, img: "fenlobiani.jpg", d: "ფენებად დაწყობილი, ხრაშუნა ცომი, გულუხვად სავსე ლობიოთი." },
-      { n: "ხაჭაპური (იმერული/მეგრული)", p: 6.50, img: "imerulikhachmegrulikhach.jpg", d: "კლასიკური ხაჭაპური, ცხელი, დნობადი ყველით." },
-      { n: "ფენოვანი ხაჭაპური", p: 7.30, img: "fenkhacha.jpg", d: "რბილი ცომი მსუბუქი ფენოვანი ტექსტურით და ბლომად ყველით." },
-      { n: "აჭარული ხაჭაპური", p: 8.00, img: "achma.jpg", d: "ნავის ფორმის ხაჭაპური, კვერცხითა და კარაქით." },
-      { n: "ხაბიძგინა", p: 7.50, img: "xabidzgina.jpg", d: "აფხაზური ხაჭაპური სიმინდის ფქვილითა და ყველით." },
-      { n: "კუბდარი", p: 8.50, img: "kubdari.jpg", d: "სვანური ტრადიციული პური, დაკეპილი ხორცისა და სანელებლების არომატული ნაზავით." },
-      { n: "გურული ღვეზელი", p: 6.80, img: "guruligvez.jpg", d: "გრძელი ფორმის ხაჭაპური, კვერცხითა და ყველით შიგნით." },
-      { n: "შაურმის ღვეზელი", p: 7.50, img: "shaurmisgvezeli.jpg", d: "შაურმის სტილის შიგთავსი, ცომში გახვეული." },
-      { n: "კარტოფილის ღვეზელი", p: 6.00, img: "sokkartgvezeli.jpg", d: "რბილი, კარაქიანი კარტოფილის შიგთავსი." },
-      { n: "პიცა", p: 9.50, img: "pica.jpg", d: "ხორცისხილული პიცა ზეთისხილით, ბულგარული წიწაკითა და ორცხობილათი." },
-      { n: "ფილონი", p: 6.50, img: "pichini.jpg", d: "ოსური ლუბიანი სოსისით." },
-      { n: "სენდვიჩი ლორით", p: 8.00, img: "sendvichi.jpg", d: "ახალი პური, წვნიანი ლორი, ყველი და ბოსტნეული." },
-      { n: "ჯოთ-დოგი", p: 6.50, img: "hotdog.jpg", d: "ცომში გამომცხვარი სოსისი — კლასიკური არჩევანი." },
-      { n: "ჯოთ-დოგი მწვანილით", p: 7.00, img: "hotdogi2.jpg", d: "ჯოთ-დოგი დამატებული სოუსებითა და მწვანილით." }
+      { n: "ლობიანი", n_en: "Lobiani", p: 6.00, img: "lobianilorisugareshodgareshe.jpg", d: "ცომში გახვეული არომატული ლობიო, ხახვითა და სანელებლებით.", d_en: "Aromatic beans wrapped in dough, with onion and spices." },
+      { n: "ლობიანი ლორით", n_en: "Lobiani with Ham", p: 7.50, img: "lobianilorisugareshodgareshe.jpg", d: "ჩვენი საყვარელი ლობიანი, გამდიდრებული წვნიანი ლორით.", d_en: "Our favorite lobiani, enriched with juicy ham." },
+      { n: "ფენოვანი ლობიანი", n_en: "Flaky Lobiani", p: 7.00, img: "fenlobiani.jpg", d: "ფენებად დაწყობილი, ხრაშუნა ცომი, გულუხვად სავსე ლობიოთი.", d_en: "Layered, crispy dough generously filled with beans." },
+      { n: "ხაჭაპური (იმერული/მეგრული)", n_en: "Khachapuri (Imeretian/Megrelian)", p: 6.50, img: "imerulikhachmegrulikhach.jpg", d: "კლასიკური ხაჭაპური, ცხელი, დნობადი ყველით.", d_en: "Classic khachapuri, hot, with melting cheese." },
+      { n: "ფენოვანი ხაჭაპური", n_en: "Flaky Khachapuri", p: 7.30, img: "fenkhacha.jpg", d: "რბილი ცომი მსუბუქი ფენოვანი ტექსტურით და ბლომად ყველით.", d_en: "Soft dough with a light flaky texture and plenty of cheese." },
+      { n: "აჭარული ხაჭაპური", n_en: "Adjarian Khachapuri", p: 8.00, img: "achma.jpg", d: "ნავის ფორმის ხაჭაპური, კვერცხითა და კარაქით.", d_en: "Boat-shaped khachapuri, topped with egg and butter." },
+      { n: "ხაბიძგინა", n_en: "Khabizgina", p: 7.50, img: "xabidzgina.jpg", d: "აფხაზური ხაჭაპური სიმინდის ფქვილითა და ყველით.", d_en: "Abkhazian khachapuri made with cornmeal and cheese." },
+      { n: "კუბდარი", n_en: "Kubdari", p: 8.50, img: "kubdari.jpg", d: "სვანური ტრადიციული პური, დაკეპილი ხორცისა და სანელებლების არომატული ნაზავით.", d_en: "Traditional Svan bread with a fragrant blend of minced meat and spices." },
+      { n: "გურული ღვეზელი", n_en: "Gurian Gvezeli", p: 6.80, img: "guruligvez.jpg", d: "გრძელი ფორმის ხაჭაპური, კვერცხითა და ყველით შიგნით.", d_en: "Elongated khachapuri with egg and cheese inside." },
+      { n: "შაურმის ღვეზელი", n_en: "Shawarma Gvezeli", p: 7.50, img: "shaurmisgvezeli.jpg", d: "შაურმის სტილის შიგთავსი, ცომში გახვეული.", d_en: "Shawarma-style filling wrapped in dough." },
+      { n: "კარტოფილის ღვეზელი", n_en: "Potato Gvezeli", p: 6.00, img: "sokkartgvezeli.jpg", d: "რბილი, კარაქიანი კარტოფილის შიგთავსი.", d_en: "Soft, buttery potato filling." },
+      { n: "პიცა", n_en: "Pizza", p: 9.50, img: "pica.jpg", d: "ხორცისხილული პიცა ზეთისხილით, ბულგარული წიწაკითა და ორცხობილათი.", d_en: "Meat-topped pizza with olives, Bulgarian pepper and croutons." },
+      { n: "ფილონი", n_en: "Piloni", p: 6.50, img: "pichini.jpg", d: "ოსური ლუბიანი სოსისით.", d_en: "Ossetian pastry filled with beans and sausage." },
+      { n: "სენდვიჩი ლორით", n_en: "Ham Sandwich", p: 8.00, img: "sendvichi.jpg", d: "ახალი პური, წვნიანი ლორი, ყველი და ბოსტნეული.", d_en: "Fresh bread, juicy ham, cheese and vegetables." },
+      { n: "ჯოთ-დოგი", n_en: "Hot Dog", p: 6.50, img: "hotdog.jpg", d: "ცომში გამომცხვარი სოსისი — კლასიკური არჩევანი.", d_en: "Sausage baked in dough — a classic choice." },
+      { n: "ჯოთ-დოგი მწვანილით", n_en: "Hot Dog with Herbs", p: 7.00, img: "hotdogi2.jpg", d: "ჯოთ-დოგი დამატებული სოუსებითა და მწვანილით.", d_en: "Hot dog with added sauces and fresh herbs." }
     ]
   },
   "ნაყინი ბურთულებით": {
-    icon: "chitisrdze.jpg", cls: "c-icecream",
+    cls: "c-icecream", labels: { ka: "ნაყინი ბურთულებით", en: "Ice Cream Scoops" },
     items: [
-      { n: "მარწყვის", p: 4.00, img: "", d: "ნაზი, კრემისებრი ნაყინი ნამდვილი მარწყვის არომატით." },
-      { n: "ვანილის", p: 4.00, img: "", d: "კლასიკური ვანილის ნაყინი." },
-      { n: "კარამელის", p: 4.20, img: "", d: "რბილი კარამელის ნოტებით გაჯერებული ნაყინი." },
-      { n: "შოკოლადის", p: 4.30, img: "", d: "ინტენსიური შოკოლადის ნაყინი." }
+      { n: "მარწყვის", n_en: "Strawberry", p: 4.00, img: "", d: "ნაზი, კრემისებრი ნაყინი ნამდვილი მარწყვის არომატით.", d_en: "Delicate, creamy ice cream with real strawberry flavor." },
+      { n: "ვანილის", n_en: "Vanilla", p: 4.00, img: "", d: "კლასიკური ვანილის ნაყინი.", d_en: "Classic vanilla ice cream." },
+      { n: "კარამელის", n_en: "Caramel", p: 4.20, img: "", d: "რბილი კარამელის ნოტებით გაჯერებული ნაყინი.", d_en: "Soft ice cream infused with caramel notes." },
+      { n: "შოკოლადის", n_en: "Chocolate", p: 4.30, img: "", d: "ინტენსიური შოკოლადის ნაყინი.", d_en: "Intense chocolate ice cream." }
     ]
   },
   "დესერტები": {
-    icon: "opera.jpg", cls: "c-dessert",
+    cls: "c-dessert", labels: { ka: "დესერტები", en: "Desserts" },
     items: [
-      { n: "ხილის ტორტი", p: 9.00, img: "xilistorti.jpg", d: "გაბაფხულის სურნელი, თითოეულ ნაჭერში — ხილით მორთული ნაზი ტორტი." },
-      { n: "ბეზეს ტორტი", p: 8.50, img: "bezestorti.jpg", d: "ხრაშუნა ბეზეს ფენები, ნაზი კრემით, ლენტით შეკრული." },
-      { n: "ჩიტის რძე", p: 6.50, img: "chitisrdze.jpg", d: "ჩოკოლადში ჩავლილი, საფუარიანი ბისკვიტის ბაზაზე დამზადებული ტკბილი დესერტი." },
-      { n: "ჩიზქეიქი", p: 6.00, img: "chizkeik.jpg", d: "გაყინული ჩიზქეიქი მანგოს ჟელეთი." },
-      { n: "ფისტას დესერტი", p: 7.50, img: "fistasdesert.jpg", d: "ბაზილიკითა და ჟოლოთი გაფორმებული, პისტას კრემიანი დესერტი." },
-      { n: "ნაპოლეონი", p: 6.50, img: "napoleoni.jpg", d: "ფენოვანი, ხრაშუნა ცომის ფენები, ნაზი კრემით." },
-      { n: "ოპერა ტორტი", p: 7.50, img: "opera.jpg", d: "ყავის არომატიანი ბისკვიტი, გამდიდრებული შოკოლადითა და კრემით." },
-      { n: "სამი შოკოლადის გრანულები", p: 8.00, img: "samishok.jpg", d: "სამი შოკოლადის (მუქი, რძიანი, თეთრი) გრანულებისგან შემდგარი დესერტი." },
-      { n: "სუფლე ბანანით", p: 6.80, img: "suflebananit.jpg", d: "ნაზი, ბანანის არომატიანი სუფლე ჩოკოლადის ბაზაზე." },
-      { n: "ტარტალეტკა", p: 5.50, img: "tartaletka.jpg", d: "შოკოლადის და მარწყვის კრემით სავსე ტარტალეტკები." },
-      { n: "ტროპიკანკა", p: 7.00, img: "tropikanka.jpg", d: "ტროპიკული ხილის სიტკბო, თითოეულ ლუკმაში." },
-      { n: "თხილის ნამცხვარი", p: 6.50, img: "txilisnamcxvari.jpg", d: "სამი შოკოლადის გრანულებით შემკული, თხილის არომატიანი ნამცხვარი." },
-      { n: "ყავის კრემ-ბრულე დესერტი", p: 7.20, img: "yaviskrembrul.jpg", d: "ყავის არომატიანი კრემ-ბრულეს დესერტი." },
-      { n: "კარამელიტა", p: 6.00, img: "karamelita.jpg", d: "კარამელით დაფარული, თხილის ნატეხებით შემკული დესერტი." },
-      { n: "მარწყვის ეკლერი", p: 5.50, img: "marwyvisekleri.jpg", d: "რბილი ეკლერის ცომი, მარწყვის კრემით სავსე." },
-      { n: "მედოქი", p: 6.50, img: "medoki.jpg", d: "თაფლის ფენოვანი ნამცხვარი კრემით." },
-      { n: "თხილის ნაწილაკები", p: 5.00, img: "natpenkha.jpg", d: "ხრაშუნა ხაჭაპურის ნაწილაკები." },
-      { n: "ხინკალის ნამცხვარი", p: 5.50, img: "khinamcxvari.jpg", d: "ხინკლის ფორმის ტკბილი დესერტი." }
+      { n: "ხილის ტორტი", n_en: "Fruit Cake", p: 9.00, img: "xilistorti.jpg", d: "გაბაფხულის სურნელი, თითოეულ ნაჭერში — ხილით მორთული ნაზი ტორტი.", d_en: "A fresh, spring-like aroma in every slice — a delicate cake topped with fruit." },
+      { n: "ბეზეს ტორტი", n_en: "Meringue Cake", p: 8.50, img: "bezestorti.jpg", d: "ხრაშუნა ბეზეს ფენები, ნაზი კრემით, ლენტით შეკრული.", d_en: "Crispy meringue layers, delicate cream, tied with a ribbon." },
+      { n: "ჩიტის რძე", n_en: "Bird's Milk", p: 6.50, img: "chitisrdze.jpg", d: "ჩოკოლადში ჩავლილი, საფუარიანი ბისკვიტის ბაზაზე დამზადებული ტკბილი დესერტი.", d_en: "A chocolate-covered sweet dessert made on a yeasted sponge base." },
+      { n: "ჩიზქეიქი", n_en: "Cheesecake", p: 6.00, img: "chizkeik.jpg", d: "გაყინული ჩიზქეიქი მანგოს ჟელეთი.", d_en: "Frozen cheesecake with mango jelly." },
+      { n: "ფისტას დესერტი", n_en: "Pistachio Dessert", p: 7.50, img: "fistasdesert.jpg", d: "ბაზილიკითა და ჟოლოთი გაფორმებული, პისტას კრემიანი დესერტი.", d_en: "Creamy pistachio dessert decorated with basil and raspberry." },
+      { n: "ნაპოლეონი", n_en: "Napoleon", p: 6.50, img: "napoleoni.jpg", d: "ფენოვანი, ხრაშუნა ცომის ფენები, ნაზი კრემით.", d_en: "Flaky, crispy dough layers with delicate cream." },
+      { n: "ოპერა ტორტი", n_en: "Opera Cake", p: 7.50, img: "opera.jpg", d: "ყავის არომატიანი ბისკვიტი, გამდიდრებული შოკოლადითა და კრემით.", d_en: "Coffee-flavored sponge, enriched with chocolate and cream." },
+      { n: "სამი შოკოლადის გრანულები", n_en: "Three Chocolate Granules", p: 8.00, img: "samishok.jpg", d: "სამი შოკოლადის (მუქი, რძიანი, თეთრი) გრანულებისგან შემდგარი დესერტი.", d_en: "A dessert made of three types of chocolate (dark, milk, white) granules." },
+      { n: "სუფლე ბანანით", n_en: "Banana Souffle", p: 6.80, img: "suflebananit.jpg", d: "ნაზი, ბანანის არომატიანი სუფლე ჩოკოლადის ბაზაზე.", d_en: "Delicate, banana-flavored souffle on a chocolate base." },
+      { n: "ტარტალეტკა", n_en: "Tartaletka", p: 5.50, img: "tartaletka.jpg", d: "შოკოლადის და მარწყვის კრემით სავსე ტარტალეტკები.", d_en: "Tartlets filled with chocolate and strawberry cream." },
+      { n: "ტროპიკანკა", n_en: "Tropicanka", p: 7.00, img: "tropikanka.jpg", d: "ტროპიკული ხილის სიტკბო, თითოეულ ლუკმაში.", d_en: "Tropical fruit sweetness in every bite." },
+      { n: "თხილის ნამცხვარი", n_en: "Hazelnut Cake", p: 6.50, img: "txilisnamcxvari.jpg", d: "სამი შოკოლადის გრანულებით შემკული, თხილის არომატიანი ნამცხვარი.", d_en: "Hazelnut-flavored cake decorated with three chocolate granules." },
+      { n: "ყავის კრემ-ბრულე დესერტი", n_en: "Coffee Crème Brûlée", p: 7.20, img: "yaviskrembrul.jpg", d: "ყავის არომატიანი კრემ-ბრულეს დესერტი.", d_en: "Coffee-flavored crème brûlée dessert." },
+      { n: "კარამელიტა", n_en: "Karamelita", p: 6.00, img: "karamelita.jpg", d: "კარამელით დაფარული, თხილის ნატეხებით შემკული დესერტი.", d_en: "Caramel-coated dessert decorated with hazelnut pieces." },
+      { n: "მარწყვის ეკლერი", n_en: "Strawberry Eclair", p: 5.50, img: "marwyvisekleri.jpg", d: "რბილი ეკლერის ცომი, მარწყვის კრემით სავსე.", d_en: "Soft eclair pastry filled with strawberry cream." },
+      { n: "მედოქი", n_en: "Medovik", p: 6.50, img: "medoki.jpg", d: "თაფლის ფენოვანი ნამცხვარი კრემით.", d_en: "Honey layered cake with cream." },
+      { n: "თხილის ნაწილაკები", n_en: "Hazelnut Pieces", p: 5.00, img: "natpenkha.jpg", d: "ხრაშუნა ხაჭაპურის ნაწილაკები.", d_en: "Crispy khachapuri-style pastry pieces." },
+      { n: "ხინკალის ნამცხვარი", n_en: "Khinkali-shaped Cake", p: 5.50, img: "khinamcxvari.jpg", d: "ხინკლის ფორმის ტკბილი დესერტი.", d_en: "A sweet dessert shaped like khinkali." }
     ]
   },
   "სასმელები": {
-    icon: "hotdog.jpg", cls: "c-drink",
+    cls: "c-drink", labels: { ka: "სასმელები", en: "Drinks" },
     items: [
-      { n: "წვენები", p: 3.50, img: "", d: "ბუნებრივი, ახლად გამოწურული ხილის წვენი." },
-      { n: "წყალი", p: 1.50, img: "", d: "სუფთა, გამაგრილებელი სასმელი წყალი." },
-      { n: "კოკაკოლა კლასიკი", p: 3.00, img: "", d: "საყვარელი გაზიანი სასმელი." },
-      { n: "ფანტა", p: 3.00, img: "", d: "ფორთოხლის არომატის ნათელი, გამაგრილებელი გაზიანი სასმელი." },
-      { n: "ლიმონათი", p: 3.50, img: "", d: "ქართული ტრადიციული ლიმონათი." }
+      { n: "წვენები", n_en: "Juices", p: 3.50, img: "", d: "ბუნებრივი, ახლად გამოწურული ხილის წვენი.", d_en: "Natural, freshly squeezed fruit juice." },
+      { n: "წყალი", n_en: "Water", p: 1.50, img: "", d: "სუფთა, გამაგრილებელი სასმელი წყალი.", d_en: "Clean, refreshing drinking water." },
+      { n: "კოკაკოლა კლასიკი", n_en: "Coca-Cola Classic", p: 3.00, img: "", d: "საყვარელი გაზიანი სასმელი.", d_en: "The beloved carbonated soft drink." },
+      { n: "ფანტა", n_en: "Fanta", p: 3.00, img: "", d: "ფორთოხლის არომატის ნათელი, გამაგრილებელი გაზიანი სასმელი.", d_en: "Bright orange-flavored, refreshing soda." },
+      { n: "ლიმონათი", n_en: "Lemonade", p: 3.50, img: "", d: "ქართული ტრადიციული ლიმონათი.", d_en: "Traditional Georgian lemonade." }
     ]
   }
 };
@@ -670,7 +736,7 @@ let activeCat = categories[0];
 
 function renderTabs(){
   tabsEl.innerHTML = categories.map(c =>
-    `<button class="tab-btn ${c===activeCat?'active':''}" data-cat="${c}">${c}</button>`
+    `<button class="tab-btn ${c===activeCat?'active':''}" data-cat="${c}">${MENU[c].labels[currentLang]}</button>`
   ).join('');
   tabsEl.querySelectorAll('.tab-btn').forEach(btn=>{
     btn.addEventListener('click', ()=>{ activeCat = btn.dataset.cat; renderTabs(); renderGrid(); });
@@ -679,18 +745,21 @@ function renderTabs(){
 
 function renderGrid(){
   const cat = MENU[activeCat];
-  gridEl.innerHTML = cat.items.map((item, idx) => `
+  gridEl.innerHTML = cat.items.map((item, idx) => {
+    const name = currentLang === 'ka' ? item.n : item.n_en;
+    return `
     <div class="food-card" data-cat="${activeCat}" data-idx="${idx}">
       <div class="food-thumb ${cat.cls}">
         <div class="ring"></div>
-        ${item.img ? `<img src="${item.img}" alt="${item.n}">` : ''}
+        ${item.img ? `<img src="${item.img}" alt="${name}">` : ''}
       </div>
       <div class="food-body">
-        <h4>${item.n}</h4>
-        <div class="food-price">${item.p.toFixed(2)} ₾ <span class="tap">დეტალურად ›</span></div>
+        <h4>${name}</h4>
+        <div class="food-price">${item.p.toFixed(2)} ₾ <span class="tap">${I18N[currentLang].detail_tap}</span></div>
       </div>
     </div>
-  `).join('');
+  `;
+  }).join('');
   gridEl.querySelectorAll('.food-card').forEach(card=>{
     card.addEventListener('click', ()=>{
       const cat = card.dataset.cat, idx = card.dataset.idx;
@@ -706,14 +775,18 @@ renderGrid();
 const modalOverlay = document.getElementById('modalOverlay');
 function openModal(cat, idx){
   const item = MENU[cat].items[idx];
+  const name = currentLang === 'ka' ? item.n : item.n_en;
+  const desc = currentLang === 'ka' ? item.d : item.d_en;
   const modalImgEl = document.getElementById('modalImg');
   modalImgEl.className = 'modal-img ' + MENU[cat].cls;
   modalImgEl.innerHTML =
     `<button class="modal-x" onclick="closeModal()">✕</button>` +
-    (item.img ? `<img src="${item.img}" alt="${item.n}">` : '');
-  document.getElementById('modalTitle').textContent = item.n;
+    (item.img ? `<img src="${item.img}" alt="${name}">` : '');
+  document.getElementById('modalTitle').textContent = name;
   document.getElementById('modalPrice').textContent = item.p.toFixed(2) + ' ₾';
-  document.getElementById('modalDesc').textContent = item.d;
+  document.getElementById('modalIngredientsLabel').textContent = I18N[currentLang].modal_ingredients;
+  document.getElementById('modalDesc').textContent = desc;
+  document.getElementById('modalCloseBtn').textContent = I18N[currentLang].modal_close;
   modalOverlay.classList.add('open');
   document.body.style.overflow = 'hidden';
 }
@@ -722,6 +795,34 @@ function closeModal(){
   document.body.style.overflow = '';
 }
 document.addEventListener('keydown', e=>{ if(e.key === 'Escape') closeModal(); });
+
+/* ============== LANGUAGE SWITCHER ============== */
+function applyLanguage(lang){
+  currentLang = lang;
+  document.documentElement.lang = lang === 'ka' ? 'ka' : 'en';
+
+  document.querySelectorAll('[data-i18n]').forEach(el=>{
+    const key = el.getAttribute('data-i18n');
+    if(I18N[lang][key] !== undefined) el.textContent = I18N[lang][key];
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el=>{
+    const key = el.getAttribute('data-i18n-html');
+    if(I18N[lang][key] !== undefined) el.innerHTML = I18N[lang][key];
+  });
+
+  document.getElementById('chatInput').placeholder = I18N[lang].chat_placeholder;
+  document.getElementById('chatTitle').textContent = I18N[lang].chat_title;
+  document.getElementById('chatOnline').textContent = I18N[lang].chat_online;
+  document.getElementById('langBtn').textContent = lang === 'ka' ? 'EN' : 'ქარ';
+
+  renderTabs();
+  renderGrid();
+  resetChatGreeting();
+}
+
+function toggleLang(){
+  applyLanguage(currentLang === 'ka' ? 'en' : 'ka');
+}
 
 /* ============== CHAT WIDGET ============== */
 const chatPanel = document.getElementById('chatPanel');
@@ -740,6 +841,16 @@ function addBubble(text, who){
   chatBody.scrollTop = chatBody.scrollHeight;
 }
 
+function resetChatGreeting(){
+  chatBody.innerHTML = `
+    <div class="bubble bot">${I18N[currentLang].chat_greeting}</div>
+    <div class="quick-replies">
+      <button class="quick-chip" onclick="sendQuick(this.textContent)">${I18N[currentLang].quick1}</button>
+      <button class="quick-chip" onclick="sendQuick(this.textContent)">${I18N[currentLang].quick2}</button>
+      <button class="quick-chip" onclick="sendQuick(this.textContent)">${I18N[currentLang].quick3}</button>
+    </div>`;
+}
+
 /* Flatten menu for lookups */
 const ALL_ITEMS = [];
 Object.keys(MENU).forEach(cat=>{
@@ -749,30 +860,34 @@ Object.keys(MENU).forEach(cat=>{
 function findItemByName(t){
   return ALL_ITEMS.find(it => t.includes(it.n.toLowerCase()));
 }
+function findItemByNameEN(t){
+  return ALL_ITEMS.find(it => t.includes(it.n_en.toLowerCase()));
+}
 
 function listCategory(cat){
   const names = MENU[cat].items.map(it=>`${it.n} (${it.p.toFixed(2)} ₾)`);
   return `${cat}-ის მენიუ:\n` + names.join(', ');
 }
+function listCategoryEN(cat){
+  const names = MENU[cat].items.map(it=>`${it.n_en} (${it.p.toFixed(2)} ₾)`);
+  return `${MENU[cat].labels.en} menu:\n` + names.join(', ');
+}
 
 function botReply(userText){
+  if(currentLang === 'en'){ botReplyEN(userText); return; }
   const t = userText.toLowerCase();
   let reply = null;
 
-  // greetings
   if(/^(გამარჯობა|სალამი|ჰეი|hi|hello)/.test(t)){
     reply = "გამარჯობა! 😊 მზად ვარ დაგეხმაროთ — მკითხეთ მენიუზე, ფასებზე, ფილიალებზე ან რასაც კი გინდათ ნილეზე.";
   }
-  // thanks
   else if(t.includes('მადლობ') || t.includes('გმადლობთ')){
     reply = "სიამოვნებით! 🍰 კიდევ რამეში დაგეხმაროთ?";
   }
-  // specific item lookup
   else if(findItemByName(t)){
     const item = findItemByName(t);
     reply = `${item.n} — ${item.p.toFixed(2)} ₾. ${item.d} შეგიძლიათ ნახოთ „${item.cat}“ კატეგორიაში მენიუს სექციაში.`;
   }
-  // category-specific questions
   else if(t.includes('ცომეულ') || t.includes('ლობიან') || t.includes('ხაჭაპურ')){
     reply = listCategory('ცომეულობა');
   }
@@ -785,15 +900,12 @@ function botReply(userText){
   else if(t.includes('სასმელ') || t.includes('წყალ') || t.includes('წვენ') || t.includes('კოკა') || t.includes('ფანტა')){
     reply = listCategory('სასმელები');
   }
-  // recommendation
   else if(t.includes('მირჩევთ') || t.includes('რეკომენდაცი') || t.includes('რას ავირჩი') || t.includes('საუკეთესო')){
-    reply = "ჩვენი ყველაზე საყვარელია იმერული ხაჭაპური და ფენოვანი ლობიანი — ორივე ცხელ-ცხელი და ახლადგამომცხვარი! ტკბილეულისთვის კი გირჩევთ შუს ან ეკლერს.";
+    reply = "ჩვენი ყველაზე საყვარელია იმერული ხაჭაპური და ფენოვანი ლობიანი — ორივე ცხელ-ცხელი და ახლადგამომცხვარი! ტკბილეულისთვის კი გირჩევთ ნაპოლეონს ან ეკლერს.";
   }
-  // full menu
   else if(t.includes('მენიუ') && !t.includes('ფასი')){
     reply = "ჩვენს მენიუში 4 კატეგორიაა: ცომეულობა, ნაყინი ბურთულებით, დესერტები და სასმელები — სულ 31 პროდუქტი. სცადეთ სთხოვოთ კონკრეტული კატეგორია, მაგ. „რა გაქვთ დესერტებში?“";
   }
-  // branches / location
   else if(t.includes('ფილიალ') || t.includes('მისამართ') || t.includes('ახლოს') || t.includes('სად ხართ')){
     reply = "გვაქვს 2 ფილიალი — ნილე დიღმის მასივი და ნილე დიდი დიღომი. სრული მისამართები და ტელეფონის ნომრები იხილეთ გვერდის „ფილიალები“ სექციაში, ან მითხარით რომელ რაიონთან ხართ ახლოს და გირჩევთ ფილიალს.";
   }
@@ -803,29 +915,82 @@ function botReply(userText){
   else if(t.includes('დიდი დიღომი')){
     reply = "ნილე დიდი დიღომის ფილიალი მდებარეობს დიდი დიღომის რაიონში. ზუსტი მისამართი და ტელეფონი იხილეთ „ფილიალები“ სექციაში.";
   }
-  // hours
   else if(t.includes('საათ') || t.includes('სამუშაო') || t.includes('ღიაა') || t.includes('იკეტ')){
     reply = "ორივე ფილიალი ღიაა ყოველდღე 08:00-დან 22:00 საათამდე, შაბათ-კვირის ჩათვლით.";
   }
-  // price
   else if(t.includes('ფას') || t.includes('ღირს') || t.includes('რა ღირს')){
-    reply = "ფასები იწყება 1.50 ₾-დან (წყალი) და აღწევს 9 ₾-მდე (შუ). ცომეული საშუალოდ 6-8.5 ₾, დესერტები 5.5-9 ₾, ნაყინი 4-4.3 ₾, სასმელები 1.5-3.5 ₾. ზუსტი ფასები ნახეთ მენიუს სექციაში, პროდუქტზე დაწკაპუნებით."
+    reply = "ფასები იწყება 1.50 ₾-დან (წყალი) და აღწევს 9 ₾-მდე (ხილის ტორტი). ცომეული საშუალოდ 6-8.5 ₾, დესერტები 5.5-9 ₾, ნაყინი 4-4.3 ₾, სასმელები 1.5-3.5 ₾. ზუსტი ფასები ნახეთ მენიუს სექციაში, პროდუქტზე დაწკაპუნებით.";
   }
-  // delivery / order
   else if(t.includes('მიტან') || t.includes('შეკვეთ') || t.includes('დელივერ') || t.includes('ონლაინ')){
     reply = "ამჟამად პირდაპირი ონლაინ შეკვეთა საიტზე არ არის ხელმისაწვდომი — გთხოვთ დაგვირეკოთ ფილიალის ნომერზე შეკვეთისთვის ან ეწვიოთ პირადად. მალე გავხსნით ონლაინ შეკვეთის შესაძლებლობასაც!";
   }
-  // social
   else if(t.includes('ინსტაგრამ') || t.includes('ფეისბუქ') || t.includes('სოც')){
     reply = "გვიპოვით Facebook-სა და Instagram-ზე — ბმულები იხილეთ „ჩვენ შესახებ“ სექციაში. მოგვყევით ახალი პროდუქტებისა და აქციების სანახავად!";
   }
-  // about
   else if(t.includes('ნილე რა') || t.includes('ვინ ხართ') || t.includes('თქვენ შესახებ') || t.includes('ისტორია')){
     reply = "ნილე არის ოჯახური საცხობი და საკონდიტრო, სადაც ყოველდღე დილაადრიან ვამზადებთ ხელნაკეთ ცომეულს, დესერტებსა და სასმელებს — მხოლოდ ნატურალური ინგრედიენტებით. მეტი ინფორმაცია „ჩვენ შესახებ“ სექციაშია.";
   }
 
   if(!reply){
     reply = "საინტერესო კითხვაა! შემიძლია გიპასუხოთ მენიუზე (მაგ. „რა გაქვთ ცომეულში?“), კონკრეტულ პროდუქტზე (მაგ. „რა არის კუბდარი?“), ფასებზე, ფილიალებზე, სამუშაო საათებზე ან ნილეს შესახებ ზოგადად. სცადეთ სხვაგვარად ჩამომიყალიბოთ შეკითხვა!";
+  }
+
+  setTimeout(()=> addBubble(reply, 'bot'), 500);
+}
+
+function botReplyEN(userText){
+  const t = userText.toLowerCase();
+  let reply = null;
+
+  if(/^(hi|hello|hey)/.test(t)){
+    reply = "Hello! 😊 I'm ready to help — ask me about the menu, prices, branches, or anything about Nile.";
+  }
+  else if(t.includes('thank')){
+    reply = "You're welcome! 🍰 Anything else I can help with?";
+  }
+  else if(findItemByNameEN(t)){
+    const item = findItemByNameEN(t);
+    reply = `${item.n_en} — ${item.p.toFixed(2)} ₾. ${item.d_en} You'll find it in the "${MENU[item.cat].labels.en}" category in the menu section.`;
+  }
+  else if(t.includes('pastr') || t.includes('lobiani') || t.includes('khachapuri') || t.includes('kubdari')){
+    reply = listCategoryEN('ცომეულობა');
+  }
+  else if(t.includes('ice cream') || t.includes('icecream') || t.includes('gelato')){
+    reply = listCategoryEN('ნაყინი ბურთულებით');
+  }
+  else if(t.includes('dessert') || t.includes('sweet') || t.includes('cake')){
+    reply = listCategoryEN('დესერტები');
+  }
+  else if(t.includes('drink') || t.includes('water') || t.includes('juice') || t.includes('cola') || t.includes('fanta') || t.includes('lemonade')){
+    reply = listCategoryEN('სასმელები');
+  }
+  else if(t.includes('recommend') || t.includes('best') || t.includes('suggest') || t.includes('favorite') || t.includes('favourite')){
+    reply = "Our most loved items are the Imeretian khachapuri and the flaky lobiani — both hot and freshly baked! For something sweet, try the Napoleon or a strawberry eclair.";
+  }
+  else if(t.includes('menu') && !t.includes('price')){
+    reply = "Our menu has 4 categories: Pastries, Ice Cream Scoops, Desserts and Drinks — 31 products in total. Try asking about a specific category, e.g. \"What desserts do you have?\"";
+  }
+  else if(t.includes('branch') || t.includes('address') || t.includes('location') || t.includes('near') || t.includes('where are you')){
+    reply = "We have 2 branches — Nile Dighmi Massive and Nile Didi Dighomi. Full addresses and phone numbers are in the \"Branches\" section, or tell me which district you're near and I'll suggest a branch.";
+  }
+  else if(t.includes('hour') || t.includes('open') || t.includes('close')){
+    reply = "Both branches are open every day from 08:00 to 22:00, including weekends.";
+  }
+  else if(t.includes('price') || t.includes('cost') || t.includes('how much')){
+    reply = "Prices start from 1.50 ₾ (water) and go up to 9 ₾ (fruit cake). Pastries average 6-8.5 ₾, desserts 5.5-9 ₾, ice cream 4-4.3 ₾, drinks 1.5-3.5 ₾. See exact prices by tapping a product in the menu.";
+  }
+  else if(t.includes('deliver') || t.includes('order') || t.includes('online')){
+    reply = "Direct online ordering isn't available on the site yet — please call the branch to order, or visit in person. Online ordering is coming soon!";
+  }
+  else if(t.includes('instagram') || t.includes('facebook') || t.includes('social')){
+    reply = "Find us on Facebook and Instagram — links are in the \"About Us\" section. Follow us for new products and promotions!";
+  }
+  else if(t.includes('about') || t.includes('who are you') || t.includes('history')){
+    reply = "Nile is a family bakery and confectionery where we make handmade pastries, desserts and drinks fresh every morning — using only natural ingredients. More info in the \"About Us\" section.";
+  }
+
+  if(!reply){
+    reply = "Great question! I can help with the menu (e.g. \"What pastries do you have?\"), a specific product (e.g. \"What is kubdari?\"), prices, branches, working hours, or Nile in general. Try rephrasing your question!";
   }
 
   setTimeout(()=> addBubble(reply, 'bot'), 500);
